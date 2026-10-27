@@ -1,0 +1,52 @@
+/* Cards and Tables */
+@layer components {
+  .ds-table-card {
+    background: white;
+    border: 1px solid var(--color-app-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-app-card);
+  }
+
+  .ds-stat-card {
+    background: white;
+    border: 1px solid var(--color-app-border);
+    border-radius: var(--radius-card);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-app-card);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ds-stat-card--interactive {
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .ds-stat-card--interactive:hover {
+    border-color: var(--color-app-border-accent);
+    box-shadow: var(--shadow-app-card-hover);
+    transform: translateY(-1px);
+  }
+
+  .ds-stat-card--interactive:focus-visible {
+    outline: none;
+    border-color: var(--color-app-border-accent);
+    box-shadow:
+      0 0 0 3px var(--color-primary-100),
+      var(--shadow-app-card);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-stat-card--interactive {
+      transition: none;
+    }
+
+    .ds-stat-card--interactive:hover {
+      transform: none;
+    }
+  }
+}

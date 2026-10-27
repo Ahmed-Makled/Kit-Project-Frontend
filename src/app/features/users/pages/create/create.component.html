@@ -1,0 +1,120 @@
+<!-- Page Wrapper with entrance animation -->
+<div class="ds-page-fade">
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
+    <div>
+      <p class="text-[11px] font-semibold tracking-widest uppercase text-primary-600 mb-1">
+        {{ (page.isEdit() ? 'USERS.FORM.EYEBROW_EDIT' : 'USERS.FORM.EYEBROW_CREATE') | translate }}
+      </p>
+      <h1 class="text-[1.55rem] font-bold tracking-tight text-app-ink">
+        {{ page.isEdit() ? ('USERS.EDIT_USER' | translate) : ('USERS.CREATE_USER' | translate) }}
+      </h1>
+      <p class="text-[13.5px] text-app-body mt-1">
+        {{ (page.isEdit() ? 'USERS.FORM.SUBTITLE_EDIT' : 'USERS.FORM.SUBTITLE_CREATE') | translate }}
+      </p>
+    </div>
+    <div class="shrink-0">
+      <button type="button" (click)="cancel()" class="btn btn-outline btn-sm group">
+        <img src="/images/icons/arrow-left.svg" class="h-4 w-4 shrink-0 rtl:rotate-180" alt="" aria-hidden="true" />
+        {{ 'SHARED.ACTIONS.BACK' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Form / Loading -->
+  @if (!page.isPageLoaded()) {
+    <div class="ds-table-card">
+      <app-spinner />
+    </div>
+  } @else if (fetchFailed()) {
+    <div class="ds-table-card">
+      <app-empty-state titleKey="USERS.ERRORS.LOAD_FAILED" messageKey="SHARED.ERRORS.TRY_AGAIN" iconSrc="/images/icons/warning-amber-grad.svg" />
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="save()" class="ds-table-card">
+      <!-- Personal Information Section -->
+      <div class="p-4 lg:p-4.5 flex items-center gap-3 border-b border-app-border">
+        <img src="/images/icons/person-blue-grad.svg" class="h-5 w-5 shrink-0" alt="" aria-hidden="true" />
+        <div>
+          <p class="text-[14.5px] font-bold tracking-tight text-app-ink">
+            {{ 'USERS.FORM.SECTION_PERSONAL' | translate }}
+          </p>
+          <p class="text-xs text-app-muted mt-0.5">
+            {{ 'USERS.FORM.SECTION_PERSONAL_SUBTITLE' | translate }}
+          </p>
+        </div>
+      </div>
+      <div class="p-4 lg:p-4.5 border-b border-app-border">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <app-input
+            formControlName="FirstName"
+            labelKey="SHARED.FIELDS.FIRST_NAME"
+            placeholderKey="SHARED.FIELDS.FIRST_NAME"
+            [control]="form.get('FirstName')" />
+          <app-input formControlName="LastName" labelKey="SHARED.FIELDS.LAST_NAME" placeholderKey="SHARED.FIELDS.LAST_NAME" [control]="form.get('LastName')" />
+          @if (!page.isEdit()) {
+            <app-input
+              formControlName="Email"
+              labelKey="SHARED.FIELDS.EMAIL"
+              placeholderKey="SHARED.PLACEHOLDERS.EMAIL"
+              type="email"
+              [control]="form.get('Email')" />
+          }
+        </div>
+      </div>
+
+      <!-- Work Details Section -->
+      <div class="p-4 lg:p-4.5 flex items-center gap-3 border-b border-app-border">
+        <img src="/images/icons/briefcase-blue-grad.svg" class="h-5 w-5 shrink-0" alt="" aria-hidden="true" />
+        <div>
+          <p class="text-[14.5px] font-bold tracking-tight text-app-ink">
+            {{ 'USERS.FORM.SECTION_WORK' | translate }}
+          </p>
+          <p class="text-xs text-app-muted mt-0.5">
+            {{ 'USERS.FORM.SECTION_WORK_SUBTITLE' | translate }}
+          </p>
+        </div>
+      </div>
+      <div class="p-4 lg:p-4.5 border-b border-app-border">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          @if (!page.isEdit()) {
+            <app-input
+              formControlName="Username"
+              labelKey="SHARED.FIELDS.USERNAME"
+              placeholderKey="SHARED.PLACEHOLDERS.USERNAME"
+              [control]="form.get('Username')" />
+          }
+          @if (!page.isEdit()) {
+            <app-input
+              formControlName="Password"
+              labelKey="SHARED.FIELDS.PASSWORD"
+              placeholderKey="SHARED.FIELDS.PASSWORD"
+              type="password"
+              [showPasswordToggle]="true"
+              [control]="form.get('Password')" />
+          }
+          <app-dropdown
+            formControlName="Role"
+            labelKey="SHARED.FIELDS.ROLE"
+            placeholderKey="SHARED.ACTIONS.SELECT"
+            [options]="roleOptions"
+            [control]="form.get('Role')"
+            searchPlaceholderKey="SHARED.PLACEHOLDERS.SEARCH"
+            noResultsTextKey="SHARED.NO_RESULTS"></app-dropdown>
+        </div>
+      </div>
+
+      <!-- Form Footer (Sticky) -->
+      <div class="p-4 lg:p-4.5 flex items-center justify-between">
+        <button type="button" (click)="cancel()" class="btn btn-outline btn-sm group">
+          <img src="/images/icons/close-gray-grad.svg" class="h-4 w-4 shrink-0" alt="" aria-hidden="true" />
+          {{ 'SHARED.ACTIONS.CANCEL' | translate }}
+        </button>
+        <button type="submit" [disabled]="disabledSubmit()" class="btn btn-primary btn-sm group">
+          <img src="/images/icons/check-white.svg" class="h-4 w-4 shrink-0" alt="" aria-hidden="true" />
+          {{ page.isEdit() ? ('SHARED.ACTIONS.UPDATE' | translate) : ('SHARED.ACTIONS.CREATE' | translate) }}
+        </button>
+      </div>
+    </form>
+  }
+</div>

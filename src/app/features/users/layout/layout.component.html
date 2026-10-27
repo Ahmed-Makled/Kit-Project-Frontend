@@ -1,0 +1,25 @@
+<div class="mb-5">
+  <div class="flex items-center justify-between gap-3">
+    <!-- Title Block -->
+    <div class="flex min-w-0 items-center gap-3">
+      <img src="/images/icons/sidebar-users-active.svg" alt="" aria-hidden="true" class="h-8 w-8 shrink-0" />
+
+      <div class="min-w-0">
+        <h1 class="truncate text-lg font-bold tracking-tight text-app-ink">
+          {{ 'NAVIGATION.USERS' | translate }}
+        </h1>
+        <p class="hidden text-xs text-app-body sm:block">
+          {{ 'USERS.PAGE_SUBTITLE' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <button type="button" class="btn btn-primary btn-sm shrink-0" (click)="showCreateForm()">
+      <img src="/images/icons/plus-white.svg" class="h-5 w-5 shrink-0" alt="" aria-hidden="true" />
+      {{ 'SHARED.ACTIONS.ADD' | translate }}
+    </button>
+  </div>
+</div>
+
+<router-outlet />

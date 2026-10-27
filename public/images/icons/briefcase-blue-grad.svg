@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 7H16V5C16 3.9 15.1 3 14 3H10C8.9 3 8 3.9 8 5V7H4C2.9 7 2 7.9 2 9V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V9C22 7.9 21.1 7 20 7ZM10 5H14V7H10V5Z" fill="url(#paint0_linear_briefcase)"/>
+<path opacity="0.6" d="M20 22H4V9H20V22Z" fill="url(#paint1_linear_briefcase)"/>
+<defs>
+<linearGradient id="paint0_linear_briefcase" x1="2" y1="3" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8FB6FF"/>
+<stop offset="1" stop-color="#2220FF"/>
+</linearGradient>
+<linearGradient id="paint1_linear_briefcase" x1="4" y1="9" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8FB6FF"/>
+<stop offset="1" stop-color="#2220FF"/>
+</linearGradient>
+</defs>
+</svg>

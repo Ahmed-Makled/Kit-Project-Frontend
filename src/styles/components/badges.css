@@ -1,0 +1,410 @@
+/* Badges, Status, and Row Actions */
+@layer components {
+  /* Reusable badges (role / status) — match templates/app-layout-users.html */
+  .ds-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .ds-badge--admin {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+  }
+
+  .ds-badge--user,
+  .ds-badge--neutral {
+    background: var(--color-app-surface);
+    color: var(--color-app-body);
+  }
+
+  .ds-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .ds-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .ds-status--active {
+    background: var(--color-success-100);
+    color: var(--color-success-800);
+  }
+
+  .ds-status--inactive {
+    background: var(--color-app-surface);
+    color: var(--color-app-body);
+  }
+
+  .ds-status--pending {
+    background: var(--color-warning-100);
+    color: var(--color-warning-800);
+  }
+
+  .ds-status--in-progress {
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+  }
+
+  .ds-status--paused {
+    background: var(--color-app-surface);
+    color: var(--color-app-body);
+  }
+
+  .ds-status--rejected {
+    background: var(--color-error-100);
+    color: var(--color-error-600);
+  }
+
+  /* Ticket workflow statuses reuse the task status palette
+     (pending, in-progress, paused, active, inactive). */
+  .ds-status--neutral {
+    background: var(--color-app-surface);
+    color: var(--color-app-body);
+  }
+
+  /* Compact, icon-style row action used in template */
+  .ds-row-action {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-control);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-app-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+      background 0.14s ease,
+      border-color 0.14s ease,
+      color 0.14s ease;
+  }
+
+  .ds-row-action:hover {
+    background: var(--color-app-surface);
+    border-color: var(--color-app-border);
+    color: var(--color-app-ink);
+  }
+
+  .ds-row-action:focus-visible {
+    outline: none;
+    border-color: var(--color-app-border-accent);
+    background: var(--color-primary-50);
+    box-shadow: 0 0 0 3px var(--color-primary-100);
+    color: var(--color-primary-700);
+  }
+
+  .ds-row-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .ds-row-action--danger:hover,
+  .ds-row-action--danger:focus-visible {
+    background: var(--color-error-100);
+    border-color: var(--color-error-200);
+    color: var(--color-error-600);
+    box-shadow: 0 0 0 3px var(--color-error-100);
+  }
+
+  .ds-row-action--info:hover,
+  .ds-row-action--info:focus-visible {
+    background: var(--color-primary-50);
+    border-color: var(--color-app-border-accent);
+    color: var(--color-primary-700);
+  }
+
+  .ds-row-action .action-icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+  }
+
+  .ds-row-action .action-icon--active {
+    display: none;
+  }
+
+  .ds-row-action:hover .action-icon--idle,
+  .ds-row-action:focus-visible .action-icon--idle {
+    display: none;
+  }
+
+  .ds-row-action:hover .action-icon--active,
+  .ds-row-action:focus-visible .action-icon--active {
+    display: block;
+  }
+
+  /* ── Ticket Status Badges ───────────────────────────────────── */
+  .ds-ticket-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    transition: all 0.15s ease;
+    cursor: default;
+  }
+
+  .ds-ticket-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* Status: New */
+  .ds-ticket-status--new {
+    background: var(--color-status-new-bg);
+    color: var(--color-status-new-text);
+    border-color: var(--color-status-new-border);
+  }
+
+  .ds-ticket-status--new:hover {
+    background: var(--color-status-new-hover);
+    border-color: var(--color-status-new);
+  }
+
+  .ds-ticket-status--new.ds-ticket-status--selected {
+    background: var(--color-status-new-selected);
+    border-color: var(--color-status-new);
+    box-shadow: 0 0 0 2px var(--color-status-new-bg);
+  }
+
+  .ds-ticket-status--new.ds-ticket-status--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-ticket-status--new .ds-ticket-status__icon {
+    color: var(--color-status-new-icon);
+  }
+
+  /* Status: Open */
+  .ds-ticket-status--open {
+    background: var(--color-status-open-bg);
+    color: var(--color-status-open-text);
+    border-color: var(--color-status-open-border);
+  }
+
+  .ds-ticket-status--open:hover {
+    background: var(--color-status-open-hover);
+    border-color: var(--color-status-open);
+  }
+
+  .ds-ticket-status--open.ds-ticket-status--selected {
+    background: var(--color-status-open-selected);
+    border-color: var(--color-status-open);
+    box-shadow: 0 0 0 2px var(--color-status-open-bg);
+  }
+
+  .ds-ticket-status--open.ds-ticket-status--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-ticket-status--open .ds-ticket-status__icon {
+    color: var(--color-status-open-icon);
+  }
+
+  /* Status: Pending */
+  .ds-ticket-status--pending {
+    background: var(--color-status-pending-bg);
+    color: var(--color-status-pending-text);
+    border-color: var(--color-status-pending-border);
+  }
+
+  .ds-ticket-status--pending:hover {
+    background: var(--color-status-pending-hover);
+    border-color: var(--color-status-pending);
+  }
+
+  .ds-ticket-status--pending.ds-ticket-status--selected {
+    background: var(--color-status-pending-selected);
+    border-color: var(--color-status-pending);
+    box-shadow: 0 0 0 2px var(--color-status-pending-bg);
+  }
+
+  .ds-ticket-status--pending.ds-ticket-status--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-ticket-status--pending .ds-ticket-status__icon {
+    color: var(--color-status-pending-icon);
+  }
+
+  /* Status: Resolved */
+  .ds-ticket-status--resolved {
+    background: var(--color-status-resolved-bg);
+    color: var(--color-status-resolved-text);
+    border-color: var(--color-status-resolved-border);
+  }
+
+  .ds-ticket-status--resolved:hover {
+    background: var(--color-status-resolved-hover);
+    border-color: var(--color-status-resolved);
+  }
+
+  .ds-ticket-status--resolved.ds-ticket-status--selected {
+    background: var(--color-status-resolved-selected);
+    border-color: var(--color-status-resolved);
+    box-shadow: 0 0 0 2px var(--color-status-resolved-bg);
+  }
+
+  .ds-ticket-status--resolved.ds-ticket-status--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-ticket-status--resolved .ds-ticket-status__icon {
+    color: var(--color-status-resolved-icon);
+  }
+
+  /* Status: Closed */
+  .ds-ticket-status--closed {
+    background: var(--color-status-closed-bg);
+    color: var(--color-status-closed-text);
+    border-color: var(--color-status-closed-border);
+  }
+
+  .ds-ticket-status--closed:hover {
+    background: var(--color-status-closed-hover);
+    border-color: var(--color-status-closed);
+  }
+
+  .ds-ticket-status--closed.ds-ticket-status--selected {
+    background: var(--color-status-closed-selected);
+    border-color: var(--color-status-closed);
+    box-shadow: 0 0 0 2px var(--color-status-closed-bg);
+  }
+
+  .ds-ticket-status--closed.ds-ticket-status--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-ticket-status--closed .ds-ticket-status__icon {
+    color: var(--color-status-closed-icon);
+  }
+
+  /* Status: Cancelled */
+  .ds-ticket-status--cancelled {
+    background: var(--color-status-cancelled-bg);
+    color: var(--color-status-cancelled-text);
+    border-color: var(--color-status-cancelled-border);
+  }
+
+  .ds-ticket-status--cancelled:hover {
+    background: var(--color-status-cancelled-hover);
+    border-color: var(--color-status-cancelled);
+  }
+
+  .ds-ticket-status--cancelled.ds-ticket-status--selected {
+    background: var(--color-status-cancelled-selected);
+    border-color: var(--color-status-cancelled);
+    box-shadow: 0 0 0 2px var(--color-status-cancelled-bg);
+  }
+
+  .ds-ticket-status--cancelled.ds-ticket-status--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ds-ticket-status--cancelled .ds-ticket-status__icon {
+    color: var(--color-status-cancelled-icon);
+  }
+
+  /* ── Ticket Priority Badges ─────────────────────────────────── */
+  /* Neutral pill — the priority color lives only in the Jira-style arrow. */
+  .ds-ticket-priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    background: var(--color-app-surface);
+    color: var(--color-app-body);
+    border: 1px solid var(--color-status-closed-border);
+    transition: all 0.15s ease;
+    cursor: default;
+  }
+
+  .ds-ticket-priority::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background-color: var(--color-app-body);
+  }
+
+  /* Priority: Low — single chevron down */
+  .ds-ticket-priority--low::before {
+    background-color: var(--color-priority-low-text);
+    -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  /* Priority: Medium — equals bars */
+  .ds-ticket-priority--medium::before {
+    background-color: var(--color-priority-medium-text);
+    -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 9h13M5.5 15h13'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 9h13M5.5 15h13'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  /* Priority: High — single chevron up */
+  .ds-ticket-priority--high::before {
+    background-color: var(--color-priority-high-text);
+    -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 15l6-6 6 6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 15l6-6 6 6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  /* Priority: Critical/Urgent — double chevron up */
+  .ds-ticket-priority--urgent::before {
+    background-color: var(--color-priority-urgent-text);
+    -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l6-6 6 6M6 19l6-6 6 6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l6-6 6 6M6 19l6-6 6 6'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  .ds-ticket-priority.ds-ticket-priority--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

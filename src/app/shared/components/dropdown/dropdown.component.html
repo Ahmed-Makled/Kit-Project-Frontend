@@ -1,0 +1,203 @@
+<div class="ds-field ds-select" (keydown.escape)="onEscape($event)">
+  @if (label || labelKey) {
+    <label [for]="effectiveId" class="ds-field__label">
+      @if (labelKey) {
+        {{ labelKey | translate }}
+      } @else {
+        {{ label }}
+      }
+      @if (isRequired()) {
+        <span class="ds-field__required">*</span>
+      }
+    </label>
+  }
+  <div class="relative">
+    <button
+      type="button"
+      [id]="effectiveId"
+      [disabled]="isDisabled"
+      [attr.aria-label]="label || labelKey ? null : ariaLabelKey ? (ariaLabelKey | translate) : ariaLabel || null"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-controls]="isOpen() ? effectiveId + '-menu' : null"
+      [attr.aria-invalid]="hasError() ? 'true' : null"
+      [attr.aria-required]="isRequired() ? 'true' : null"
+      [attr.aria-describedby]="hasError() ? effectiveId + '-error' : null"
+      aria-haspopup="listbox"
+      [class.pe-16]="clearable && hasClearableSelection() && !isDisabled"
+      (click)="toggleDropdown()"
+      class="ds-select__trigger {{ sizeClass() }} {{ variantClass() }} {{ triggerStateClass() }} {{ triggerClass }}">
+      <span class="truncate flex flex-1 min-w-0 items-center gap-2 text-start">
+        @if (!multiple && selectedOption()?.iconSrc) {
+          <img [src]="selectedOption()?.activeIconSrc || selectedOption()?.iconSrc" width="24" height="24" class="h-5 w-5 shrink-0" alt="" aria-hidden="true" />
+        } @else if (triggerSelectedIconPath(); as tIcon) {
+          <svg
+            class="w-5 h-5 shrink-0 {{ selectedOption()?.iconClass || 'text-gray-500' }}"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="tIcon"></path>
+          </svg>
+        }
+        <span
+          class="ds-select__trigger-text"
+          [class]="multiple ? (multiSelectionTriggerText() ? 'text-gray-900' : 'text-gray-400') : displayText() ? 'text-gray-900' : 'text-gray-400'"
+          [title]="
+            multiple
+              ? multiSelectionTriggerText() || (placeholderKey ? (placeholderKey | translate) : placeholder)
+              : displayText() || (placeholderKey ? (placeholderKey | translate) : placeholder)
+          ">
+          @if (multiple) {
+            {{ multiSelectionTriggerText() ? multiSelectionTriggerText() : placeholderKey ? (placeholderKey | translate) : placeholder }}
+          } @else {
+            {{ (displayText() | translate) || (placeholderKey ? (placeholderKey | translate) : placeholder) }}
+          }
+        </span>
+      </span>
+      <div class="flex items-center gap-2 shrink-0">
+        <svg class="ds-select__chevron" [class.ds-select__chevron--open]="isOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </button>
+    @if (clearable && hasClearableSelection() && !isDisabled) {
+      <button
+        type="button"
+        (click)="clearSelection($event)"
+        class="absolute end-9 top-1/2 -translate-y-1/2 rounded text-gray-400 hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-primary-500"
+        [attr.aria-label]="'SHARED.ACTIONS.CLEAR' | translate">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    }
+
+    <!-- Dropdown Menu -->
+    @if (isOpen()) {
+      <div
+        [id]="effectiveId + '-menu'"
+        class="ds-select__menu"
+        [style.min-width.px]="menuWidth || null"
+        [class.ds-select__menu--top]="menuPlacement() === 'top'"
+        (click)="$event.stopPropagation()">
+        <!-- Search Input -->
+        @if (isSearchable) {
+          <div class="ds-select__search">
+            <input
+              type="text"
+              [placeholder]="searchPlaceholderKey ? (searchPlaceholderKey | translate) : searchPlaceholder"
+              [value]="searchQuery()"
+              [attr.aria-label]="'SHARED.ACTIONS.SEARCH' | translate"
+              (input)="onSearchInput($event)"
+              (click)="$event.stopPropagation()"
+              class="ds-select__search-input"
+              autocomplete="off" />
+          </div>
+        }
+
+        <!-- Options List -->
+        <div class="ds-select__options" role="listbox">
+          @if (menuRows().length === 0) {
+            <div class="ds-select__empty">
+              {{ noResultsTextKey ? (noResultsTextKey | translate) : noResultsText || ('SHARED.NO_RESULTS' | translate) }}
+            </div>
+          } @else {
+            <ul>
+              @for (row of menuRows(); track row.pathKey) {
+                <li class="flex items-center">
+                  @if (tree && row.hasChildren) {
+                    <button
+                      type="button"
+                      class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100"
+                      (click)="toggleExpandBranch(row.pathKey, $event)"
+                      [attr.aria-expanded]="isBranchExpanded(row.pathKey)"
+                      [attr.aria-label]="'SHARED.ACTIONS.TOGGLE_GROUP' | translate">
+                      <svg
+                        class="h-4 w-4 transition-transform"
+                        [class.rtl:rotate-180]="!isBranchExpanded(row.pathKey)"
+                        [class.rotate-90]="isBranchExpanded(row.pathKey)"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                      </svg>
+                    </button>
+                  } @else if (tree) {
+                    <span class="inline-flex h-8 w-8 shrink-0" aria-hidden="true"></span>
+                  }
+                  <button
+                    type="button"
+                    (click)="selectOption(row.option)"
+                    [disabled]="row.option.IsActive === false"
+                    class="ds-select__option min-w-0 flex-1"
+                    role="option"
+                    [attr.aria-selected]="isOptionSelected(row.option.Id)"
+                    [class.ds-select__option--selected]="isOptionSelected(row.option.Id)"
+                    [class.ds-select__option--disabled]="row.option.IsActive === false">
+                    <!-- Multi checkbox -->
+                    @if (multiple) {
+                      <span
+                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded border border-gray-300"
+                        [class.border-primary-600]="isOptionSelected(row.option.Id)"
+                        [class.bg-primary-600]="isOptionSelected(row.option.Id)"
+                        aria-hidden="true">
+                        @if (isOptionSelected(row.option.Id)) {
+                          <svg class="h-3 w-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        }
+                      </span>
+                    }
+
+                    <span class="flex min-w-0 flex-1 items-center gap-2" [style.marginInlineStart.rem]="tree ? row.depth * 0.75 : null">
+                      @if (row.option.iconSrc) {
+                        <img
+                          [src]="isOptionSelected(row.option.Id) ? row.option.activeIconSrc || row.option.iconSrc : row.option.iconSrc"
+                          width="24"
+                          height="24"
+                          class="h-5 w-5 shrink-0"
+                          alt=""
+                          aria-hidden="true" />
+                      } @else if (row.option.icon) {
+                        <svg class="w-5 h-5 shrink-0 {{ row.option.iconClass || 'text-gray-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="row.option.icon"></path>
+                        </svg>
+                      }
+                      <span class="truncate">
+                        {{ row.option.Name | translate }}
+                      </span>
+                    </span>
+
+                    @if (isOptionSelected(row.option.Id) && !multiple) {
+                      <svg class="ds-select__check" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    }
+                  </button>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Error Message -->
+  @if (hasError() && getErrorMessageKey(); as errorKey) {
+    <div class="ds-field__error" [id]="effectiveId + '-error'" aria-live="polite">
+      <svg class="ds-field__error-icon" fill="currentColor" viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clip-rule="evenodd"></path>
+      </svg>
+      @if (getErrorMessageParams(); as params) {
+        <span>{{ errorKey | translate: params }}</span>
+      } @else {
+        <span>{{ errorKey | translate }}</span>
+      }
+    </div>
+  }
+</div>

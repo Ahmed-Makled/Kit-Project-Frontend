@@ -1,0 +1,159 @@
+/* Checkbox System — ds-checkbox */
+@layer components {
+  .ds-checkbox {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .ds-checkbox--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Hide native checkbox */
+  .ds-checkbox__input {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 50%;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
+
+  /* Custom checkmark box */
+  .ds-checkbox__checkmark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1.5px solid var(--color-app-border);
+    border-radius: 5px;
+    background: var(--color-app-page);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .ds-checkbox__checkmark svg {
+    width: 75%;
+    height: 75%;
+    color: white;
+    opacity: 0;
+    transform: scale(0.8);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  /* Size variants */
+  .ds-checkbox--sm .ds-checkbox__checkmark {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ds-checkbox--md .ds-checkbox__checkmark {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ds-checkbox--lg .ds-checkbox__checkmark {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  /* Label */
+  .ds-checkbox__label {
+    font-size: 13.5px;
+    color: var(--color-app-body);
+    line-height: 1.4;
+    transition: color 0.15s ease;
+  }
+
+  .ds-checkbox--sm .ds-checkbox__label {
+    font-size: 12px;
+  }
+
+  .ds-checkbox--lg .ds-checkbox__label {
+    font-size: 14px;
+  }
+
+  .ds-checkbox__label--checked {
+    color: var(--color-app-ink);
+    font-weight: 500;
+  }
+
+  /* States */
+  .ds-checkbox__input:focus-visible + .ds-checkbox__checkmark {
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+    border-color: var(--color-primary-500);
+  }
+
+  .ds-checkbox__input:checked + .ds-checkbox__checkmark {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+  }
+
+  .ds-checkbox__input:checked + .ds-checkbox__checkmark svg {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Variant: primary (default behavior, no override needed) */
+  .ds-checkbox__input--primary:checked + .ds-checkbox__checkmark {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+  }
+
+  .ds-checkbox__input--primary:focus-visible + .ds-checkbox__checkmark {
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+    border-color: var(--color-primary-500);
+  }
+
+  /* Variant: success */
+  .ds-checkbox__input--success:checked + .ds-checkbox__checkmark {
+    background: var(--color-success-600);
+    border-color: var(--color-success-600);
+  }
+
+  .ds-checkbox__input--success:focus-visible + .ds-checkbox__checkmark {
+    box-shadow: 0 0 0 3px var(--color-focus-success);
+    border-color: var(--color-success-600);
+  }
+
+  .ds-checkbox__input--success:checked ~ .ds-checkbox__label {
+    color: var(--color-success-600);
+  }
+
+  /* Variant: danger */
+  .ds-checkbox__input--danger:checked + .ds-checkbox__checkmark {
+    background: var(--color-error-600);
+    border-color: var(--color-error-600);
+  }
+
+  .ds-checkbox__input--danger:focus-visible + .ds-checkbox__checkmark {
+    box-shadow: 0 0 0 3px var(--color-focus-danger);
+    border-color: var(--color-error-600);
+  }
+
+  .ds-checkbox__input--danger:checked ~ .ds-checkbox__label {
+    color: var(--color-error-600);
+  }
+
+  /* Disabled states */
+  .ds-checkbox__input:disabled + .ds-checkbox__checkmark {
+    background: var(--color-app-surface);
+    border-color: var(--color-app-border);
+  }
+
+  .ds-checkbox__input:checked:disabled + .ds-checkbox__checkmark {
+    background: var(--color-app-muted);
+    border-color: var(--color-app-muted);
+  }
+}

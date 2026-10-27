@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 12C14.76 12 17 9.76 17 7C17 4.24 14.76 2 12 2C9.24 2 7 4.24 7 7C7 9.76 9.24 12 12 12Z" fill="url(#paint0_linear_person)"/>
+<path d="M12 14C8.67 14 2 15.67 2 19V21H22V19C22 15.67 15.33 14 12 14Z" fill="url(#paint1_linear_person)"/>
+<defs>
+<linearGradient id="paint0_linear_person" x1="7" y1="2" x2="17" y2="12" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8FB6FF"/>
+<stop offset="1" stop-color="#2220FF"/>
+</linearGradient>
+<linearGradient id="paint1_linear_person" x1="2" y1="14" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8FB6FF"/>
+<stop offset="1" stop-color="#2220FF"/>
+</linearGradient>
+</defs>
+</svg>

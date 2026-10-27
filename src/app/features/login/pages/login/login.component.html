@@ -1,0 +1,167 @@
+<div class="fixed inset-0 z-0 overflow-hidden bg-gray-50" aria-hidden="true">
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+</div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<div class="relative z-10 block border-b border-gray-200/60 bg-gray-50/90 px-5 py-4 text-center lg:hidden">
+  <p class="text-[10px] font-semibold tracking-widest text-primary-600 uppercase">{{ 'AUTH.MARKETING.EYEBROW' | translate }}</p>
+  <p class="mt-1.5 text-sm text-gray-500">{{ 'AUTH.APP_NAME' | translate }} · {{ 'AUTH.LOGIN_INSTRUCTION' | translate }}</p>
+</div>
+
+<div class="relative z-10 grid min-h-[100dvh] grid-cols-1 lg:grid-cols-2">
+  <aside class="hidden flex-col justify-between border-e border-gray-200/60 px-16 py-14 lg:flex" aria-labelledby="mkt-heading">
+    <div class="inline-flex items-center gap-2.5">
+      <div class="auth-logo-icon flex size-9 items-center justify-center rounded-xl shadow-md shadow-primary-500/20">
+        <img src="/images/icons/login-bolt-white.svg" alt="" aria-hidden="true" class="size-[18px]" />
+      </div>
+      <span class="font-sans text-[15px] font-semibold tracking-tight text-gray-900">{{ 'AUTH.APP_NAME' | translate }}</span>
+    </div>
+
+    <div class="flex flex-1 flex-col justify-center">
+      <p class="mb-5 text-[11px] font-semibold tracking-widest text-primary-600 uppercase">{{ 'AUTH.MARKETING.EYEBROW' | translate }}</p>
+      <h2 id="mkt-heading" class="max-w-[480px] font-sans text-[clamp(2.3rem,3.8vw,3.4rem)] leading-[1.05] font-bold tracking-tight text-gray-900">
+        {{ 'AUTH.MARKETING.HEADLINE_LINE1' | translate }}<br />
+        {{ 'AUTH.MARKETING.HEADLINE_LINE2' | translate }}&nbsp;<em class="text-gradient font-normal not-italic">{{
+          'AUTH.MARKETING.HEADLINE_ACCENT' | translate
+        }}</em>
+      </h2>
+      <p class="mt-5 max-w-[400px] text-[15px] leading-relaxed text-gray-600">
+        {{ 'AUTH.MARKETING.SUBHEADLINE' | translate }}
+      </p>
+
+      <div class="mt-11 flex max-w-[460px] items-stretch gap-3" aria-hidden="true">
+        <div class="flex min-h-[128px] flex-1 flex-col rounded-2xl border border-gray-200/60 bg-white p-4 shadow-sm">
+          <p class="mb-2.5 text-[10px] font-semibold tracking-widest text-gray-400 uppercase">{{ 'AUTH.MARKETING.DIAGRAM_SOURCE' | translate }}</p>
+          <pre
+            class="mt-auto font-mono text-[11px] leading-relaxed whitespace-pre-wrap text-gray-500"><span class="text-primary-600">{{ 'AUTH.MARKETING.DIAGRAM_CODE_LINE1' | translate }}</span>
+<span class="text-success-600">{{ 'AUTH.MARKETING.DIAGRAM_CODE_LINE2' | translate }}</span></pre>
+        </div>
+        <div class="diagram-arrow flex items-center justify-center pt-5">
+          <img src="/images/icons/login-arrow.svg" alt="" aria-hidden="true" width="22" height="22" />
+        </div>
+        <div class="flex min-h-[128px] flex-1 flex-col rounded-2xl border border-gray-200/60 bg-white p-4 shadow-sm">
+          <p class="mb-2.5 text-[10px] font-semibold tracking-widest text-gray-400 uppercase">{{ 'AUTH.MARKETING.DIAGRAM_TARGET' | translate }}</p>
+          <div class="mt-auto flex flex-col gap-2">
+            <div class="h-1.5 w-[88%] rounded bg-gradient-to-r from-primary-600 to-primary-300"></div>
+            <div class="h-1.5 w-[70%] rounded bg-gray-100"></div>
+            <div class="h-1.5 w-[80%] rounded bg-gray-100"></div>
+            <div class="mt-1.5 grid grid-cols-2 gap-1.5">
+              <div class="h-6 rounded-lg bg-primary-100"></div>
+              <div class="h-6 rounded-lg bg-gray-100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-11 grid grid-cols-3 gap-6">
+        <div class="flex flex-col gap-2">
+          <div class="flex size-9 items-center justify-center rounded-xl border border-primary-100 bg-primary-50">
+            <img src="/images/icons/login-bolt.svg" alt="" aria-hidden="true" class="size-4" />
+          </div>
+          <p class="font-sans text-[13px] font-semibold tracking-tight text-gray-900">{{ 'AUTH.MARKETING.FEATURE_FAST_TITLE' | translate }}</p>
+          <p class="text-[12px] leading-relaxed text-gray-500">{{ 'AUTH.MARKETING.FEATURE_FAST_DESC' | translate }}</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex size-9 items-center justify-center rounded-xl border border-primary-100 bg-primary-50">
+            <img src="/images/icons/login-cube.svg" alt="" aria-hidden="true" class="size-4" />
+          </div>
+          <p class="font-sans text-[13px] font-semibold tracking-tight text-gray-900">{{ 'AUTH.MARKETING.FEATURE_STRUCTURE_TITLE' | translate }}</p>
+          <p class="text-[12px] leading-relaxed text-gray-500">{{ 'AUTH.MARKETING.FEATURE_STRUCTURE_DESC' | translate }}</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex size-9 items-center justify-center rounded-xl border border-primary-100 bg-primary-50">
+            <img src="/images/icons/login-spark.svg" alt="" aria-hidden="true" class="size-4" />
+          </div>
+          <p class="font-sans text-[13px] font-semibold tracking-tight text-gray-900">{{ 'AUTH.MARKETING.FEATURE_UX_TITLE' | translate }}</p>
+          <p class="text-[12px] leading-relaxed text-gray-500">{{ 'AUTH.MARKETING.FEATURE_UX_DESC' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-[12px] text-gray-400">© {{ 'AUTH.APP_NAME' | translate }}. {{ 'AUTH.ALL_RIGHTS_RESERVED' | translate }}</p>
+  </aside>
+
+  <main class="flex flex-col items-center justify-center px-8 py-12 lg:min-h-[100dvh]" aria-labelledby="login-heading">
+    <div
+      class="login-slide-up w-full max-w-[420px] rounded-3xl border border-gray-200/60 bg-white px-10 py-11 shadow-[0_24px_64px_-16px_rgba(59,130,246,0.12),0_4px_16px_-4px_rgba(0,0,0,0.06)]">
+      <div class="mb-8 text-center">
+        <div class="mb-6 inline-flex flex-col items-center gap-2.5">
+          <div class="auth-logo-icon flex size-[52px] items-center justify-center rounded-2xl shadow-lg shadow-primary-500/30">
+            <img src="/images/icons/login-bolt-white.svg" alt="" aria-hidden="true" class="size-7" />
+          </div>
+          <span class="font-sans text-[13px] font-medium text-gray-500">{{ 'AUTH.APP_NAME' | translate }}</span>
+        </div>
+        <h1 id="login-heading" class="font-sans text-[1.75rem] font-bold tracking-tight text-gray-900">{{ 'AUTH.LOGIN' | translate }}</h1>
+        <p class="mt-1.5 text-sm text-gray-500">{{ 'AUTH.LOGIN_INSTRUCTION' | translate }}</p>
+      </div>
+
+      @if (error()) {
+        <div
+          class="mb-4 flex items-start gap-2.5 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[13px] leading-relaxed text-red-800"
+          role="alert">
+          <img src="/images/icons/login-alert.svg" alt="" aria-hidden="true" class="mt-px size-4 shrink-0" />
+          <span class="leading-snug font-medium">{{ error() || '' | translate }}</span>
+        </div>
+      }
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+        <app-input
+          id="Username"
+          formControlName="Username"
+          labelKey="AUTH.FIELDS.USERNAME"
+          placeholderKey="AUTH.FIELDS.USERNAME_PLACEHOLDER"
+          [iconStart]="inputIcons.user"
+          [control]="loginForm.get('Username')"
+          [errorMessages]="{ required: 'AUTH.VALIDATION.USERNAME_REQUIRED' }"
+          autocomplete="username" />
+
+        <app-input
+          id="Password"
+          type="password"
+          formControlName="Password"
+          labelKey="AUTH.FIELDS.PASSWORD"
+          placeholderKey="AUTH.FIELDS.PASSWORD_PLACEHOLDER"
+          [iconStart]="inputIcons.lock"
+          [control]="loginForm.get('Password')"
+          [showPasswordToggle]="true"
+          [errorMessages]="{
+            required: 'AUTH.VALIDATION.PASSWORD_REQUIRED',
+            minlength: 'AUTH.VALIDATION.PASSWORD_MIN_LENGTH',
+          }"
+          autocomplete="current-password" />
+
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg mt-2 w-full font-sans tracking-tight"
+          [disabled]="loading() || loginForm.invalid"
+          [attr.aria-busy]="loading()">
+          @if (loading()) {
+            <span class="login-spin size-4 rounded-full border-2 border-white/35 border-t-white" aria-hidden="true"></span>
+            <span>{{ 'AUTH.LOGGING_IN' | translate }}</span>
+          } @else {
+            <span>{{ 'AUTH.LOGIN_BUTTON' | translate }}</span>
+          }
+        </button>
+
+        <div class="my-1 flex items-center gap-3">
+          <div class="h-px flex-1 bg-gray-200/60"></div>
+          <span class="text-[12px] text-gray-400">{{ 'AUTH.DIVIDER_OR_CONTINUE' | translate }}</span>
+          <div class="h-px flex-1 bg-gray-200/60"></div>
+        </div>
+
+        <button type="button" class="btn btn-outline btn-lg w-full font-medium" disabled aria-disabled="true">
+          <img src="/images/icons/login-google.svg" alt="" aria-hidden="true" class="size-[18px]" />
+          {{ 'AUTH.CONTINUE_WITH_GOOGLE' | translate }}
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-[12px] text-gray-400">
+        {{ 'AUTH.SIGN_IN_FOOTER_TERMS' | translate }}
+      </p>
+    </div>
+
+    <p class="mt-8 block text-center text-[12px] text-gray-400 lg:hidden">© {{ 'AUTH.APP_NAME' | translate }}. {{ 'AUTH.ALL_RIGHTS_RESERVED' | translate }}</p>
+  </main>
+</div>

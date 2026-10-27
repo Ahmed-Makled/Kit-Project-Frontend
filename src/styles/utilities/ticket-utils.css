@@ -1,0 +1,260 @@
+/* Ticket Design System — Tailwind Utility Classes */
+@layer utilities {
+  /* Status Colors */
+  .bg-status-new {
+    background-color: var(--color-status-new-bg);
+  }
+  .bg-status-new-hover {
+    background-color: var(--color-status-new-hover);
+  }
+  .bg-status-new-selected {
+    background-color: var(--color-status-new-selected);
+  }
+  .text-status-new {
+    color: var(--color-status-new-text);
+  }
+  .text-status-new-icon {
+    color: var(--color-status-new-icon);
+  }
+  .border-status-new {
+    border-color: var(--color-status-new-border);
+  }
+
+  .bg-status-open {
+    background-color: var(--color-status-open-bg);
+  }
+  .bg-status-open-hover {
+    background-color: var(--color-status-open-hover);
+  }
+  .bg-status-open-selected {
+    background-color: var(--color-status-open-selected);
+  }
+  .text-status-open {
+    color: var(--color-status-open-text);
+  }
+  .text-status-open-icon {
+    color: var(--color-status-open-icon);
+  }
+  .border-status-open {
+    border-color: var(--color-status-open-border);
+  }
+
+  .bg-status-pending {
+    background-color: var(--color-status-pending-bg);
+  }
+  .bg-status-pending-hover {
+    background-color: var(--color-status-pending-hover);
+  }
+  .bg-status-pending-selected {
+    background-color: var(--color-status-pending-selected);
+  }
+  .text-status-pending {
+    color: var(--color-status-pending-text);
+  }
+  .text-status-pending-icon {
+    color: var(--color-status-pending-icon);
+  }
+  .border-status-pending {
+    border-color: var(--color-status-pending-border);
+  }
+
+  .bg-status-resolved {
+    background-color: var(--color-status-resolved-bg);
+  }
+  .bg-status-resolved-hover {
+    background-color: var(--color-status-resolved-hover);
+  }
+  .bg-status-resolved-selected {
+    background-color: var(--color-status-resolved-selected);
+  }
+  .text-status-resolved {
+    color: var(--color-status-resolved-text);
+  }
+  .text-status-resolved-icon {
+    color: var(--color-status-resolved-icon);
+  }
+  .border-status-resolved {
+    border-color: var(--color-status-resolved-border);
+  }
+
+  .bg-status-closed {
+    background-color: var(--color-status-closed-bg);
+  }
+  .bg-status-closed-hover {
+    background-color: var(--color-status-closed-hover);
+  }
+  .bg-status-closed-selected {
+    background-color: var(--color-status-closed-selected);
+  }
+  .text-status-closed {
+    color: var(--color-status-closed-text);
+  }
+  .text-status-closed-icon {
+    color: var(--color-status-closed-icon);
+  }
+  .border-status-closed {
+    border-color: var(--color-status-closed-border);
+  }
+
+  .bg-status-cancelled {
+    background-color: var(--color-status-cancelled-bg);
+  }
+  .bg-status-cancelled-hover {
+    background-color: var(--color-status-cancelled-hover);
+  }
+  .bg-status-cancelled-selected {
+    background-color: var(--color-status-cancelled-selected);
+  }
+  .text-status-cancelled {
+    color: var(--color-status-cancelled-text);
+  }
+  .text-status-cancelled-icon {
+    color: var(--color-status-cancelled-icon);
+  }
+  .border-status-cancelled {
+    border-color: var(--color-status-cancelled-border);
+  }
+
+  /* Priority Colors */
+  .bg-priority-low {
+    background-color: var(--color-priority-low-bg);
+  }
+  .bg-priority-low-hover {
+    background-color: var(--color-priority-low-hover);
+  }
+  .bg-priority-low-selected {
+    background-color: var(--color-priority-low-selected);
+  }
+  .text-priority-low {
+    color: var(--color-priority-low-text);
+  }
+  .text-priority-low-icon {
+    color: var(--color-priority-low-icon);
+  }
+  .border-priority-low {
+    border-color: var(--color-priority-low-border);
+  }
+
+  .bg-priority-medium {
+    background-color: var(--color-priority-medium-bg);
+  }
+  .bg-priority-medium-hover {
+    background-color: var(--color-priority-medium-hover);
+  }
+  .bg-priority-medium-selected {
+    background-color: var(--color-priority-medium-selected);
+  }
+  .text-priority-medium {
+    color: var(--color-priority-medium-text);
+  }
+  .text-priority-medium-icon {
+    color: var(--color-priority-medium-icon);
+  }
+  .border-priority-medium {
+    border-color: var(--color-priority-medium-border);
+  }
+
+  .bg-priority-high {
+    background-color: var(--color-priority-high-bg);
+  }
+  .bg-priority-high-hover {
+    background-color: var(--color-priority-high-hover);
+  }
+  .bg-priority-high-selected {
+    background-color: var(--color-priority-high-selected);
+  }
+  .text-priority-high {
+    color: var(--color-priority-high-text);
+  }
+  .text-priority-high-icon {
+    color: var(--color-priority-high-icon);
+  }
+  .border-priority-high {
+    border-color: var(--color-priority-high-border);
+  }
+
+  .bg-priority-urgent {
+    background-color: var(--color-priority-urgent-bg);
+  }
+  .bg-priority-urgent-hover {
+    background-color: var(--color-priority-urgent-hover);
+  }
+  .bg-priority-urgent-selected {
+    background-color: var(--color-priority-urgent-selected);
+  }
+  .text-priority-urgent {
+    color: var(--color-priority-urgent-text);
+  }
+  .text-priority-urgent-icon {
+    color: var(--color-priority-urgent-icon);
+  }
+  .border-priority-urgent {
+    border-color: var(--color-priority-urgent-border);
+  }
+
+  /* Primary Colors (for chart backgrounds etc.) */
+  .bg-status-new-primary {
+    background-color: var(--color-status-new);
+  }
+  .bg-status-open-primary {
+    background-color: var(--color-status-open);
+  }
+  .bg-status-pending-primary {
+    background-color: var(--color-status-pending);
+  }
+  .bg-status-resolved-primary {
+    background-color: var(--color-status-resolved);
+  }
+  .bg-status-closed-primary {
+    background-color: var(--color-status-closed);
+  }
+  .bg-status-cancelled-primary {
+    background-color: var(--color-status-cancelled);
+  }
+
+  .bg-priority-low-primary {
+    background-color: var(--color-priority-low);
+  }
+  .bg-priority-medium-primary {
+    background-color: var(--color-priority-medium);
+  }
+  .bg-priority-high-primary {
+    background-color: var(--color-priority-high);
+  }
+  .bg-priority-urgent-primary {
+    background-color: var(--color-priority-urgent);
+  }
+
+  /* Chart-specific classes for Highcharts */
+  .text-chart-status-new {
+    color: var(--color-status-new);
+  }
+  .text-chart-status-open {
+    color: var(--color-status-open);
+  }
+  .text-chart-status-pending {
+    color: var(--color-status-pending);
+  }
+  .text-chart-status-resolved {
+    color: var(--color-status-resolved);
+  }
+  .text-chart-status-closed {
+    color: var(--color-status-closed);
+  }
+  .text-chart-status-cancelled {
+    color: var(--color-status-cancelled);
+  }
+
+  .text-chart-priority-low {
+    color: var(--color-priority-low);
+  }
+  .text-chart-priority-medium {
+    color: var(--color-priority-medium);
+  }
+  .text-chart-priority-high {
+    color: var(--color-priority-high);
+  }
+  .text-chart-priority-urgent {
+    color: var(--color-priority-urgent);
+  }
+}

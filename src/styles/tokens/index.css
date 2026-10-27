@@ -1,0 +1,231 @@
+/* Tailwind CSS v4 — design tokens (replaces tailwind.config.js theme.extend) */
+@import 'tailwindcss';
+
+@theme {
+  /* Brand blue = #2563EB; primary-500 is the base action color. */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #2563eb;
+  --color-primary-600: #1d4ed8;
+  --color-primary-700: #1e40af;
+  --color-primary-800: #1e3a8a;
+  --color-primary-900: #1e3a5f;
+  --color-primary-950: #172554;
+
+  /* App shell surfaces — Slate palette (eye-friendly) */
+  --color-app-page: #f8fafc;
+  --color-app-surface: #f1f5f9;
+  --color-app-ink: #1e293b;
+  --color-app-muted: #94a3b8;
+  --color-app-body: #475569;
+  --color-app-border: rgb(15 23 42 / 0.08);
+  --color-app-border-accent: rgb(37 99 235 / 0.2);
+
+  /* Shared corner scale */
+  --radius-control-sm: 0.5rem;
+  --radius-control: 0.625rem;
+  --radius-control-lg: 0.75rem;
+  --radius-card: 1rem;
+
+  --shadow-app-card: 0 1px 3px rgb(15 23 42 / 0.06), 0 8px 24px -8px rgb(37 99 235 / 0.08);
+  --shadow-app-card-hover: 0 8px 22px -14px rgb(15 23 42 / 0.18), 0 3px 10px -8px rgb(37 99 235 / 0.12);
+  --shadow-app-btn: 0 3px 10px rgb(37 99 235 / 0.2);
+  --shadow-btn-primary: 0 1px 3px rgb(37 99 235 / 0.16);
+  --shadow-btn-primary-hover: 0 4px 12px rgb(37 99 235 / 0.22);
+  --shadow-btn-danger: 0 1px 3px rgb(220 38 38 / 0.14);
+  --shadow-btn-danger-hover: 0 4px 12px rgb(220 38 38 / 0.2);
+  --shadow-btn-warning: 0 1px 3px rgb(217 119 6 / 0.14);
+  --shadow-btn-warning-hover: 0 4px 12px rgb(217 119 6 / 0.2);
+  --shadow-btn-success: 0 1px 3px rgb(22 163 74 / 0.14);
+  --shadow-btn-success-hover: 0 4px 12px rgb(22 163 74 / 0.2);
+
+  /* Secondary scale */
+  --color-secondary-50: #fdfee8;
+  --color-secondary-100: #fbffc2;
+  --color-secondary-200: #f5ff87;
+  --color-secondary-300: #ebf266;
+  --color-secondary-400: #dfe035;
+  --color-secondary-500: #c0c416;
+  --color-secondary-600: #969c0d;
+  --color-secondary-700: #71760f;
+  --color-secondary-800: #595d13;
+  --color-secondary-900: #4a4e15;
+  --color-secondary-950: #272a05;
+
+  /* Semantic — Error / Red */
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+
+  /* Semantic — Success / Green */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+
+  /* Semantic — Warning / Amber */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+
+  /* Neutral grays */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Overlay */
+  --color-overlay-dark: rgba(15, 23, 42, 0.32);
+  --color-overlay-modal: rgba(15, 23, 42, 0.49);
+
+  /* Focus ring */
+  --color-focus-error: rgb(239 68 68 / 0.12);
+  --color-focus-success: rgb(22 163 74 / 0.15);
+  --color-focus-danger: rgb(220 38 38 / 0.15);
+
+  /* Skeleton */
+  --color-skeleton: #e2e8f0;
+  --color-skeleton-highlight: #cbd5e1;
+  --color-skeleton-dark: #cbd5e1;
+  --color-skeleton-dark-highlight: #94a3b8;
+
+  /* Shadows */
+  --shadow-modal: 0px 8px 80px 0px rgba(15, 23, 42, 0.24), 0px 4px 8px 0px rgba(15, 23, 42, 0.2);
+  --shadow-dropdown: 0 8px 32px -4px rgb(15 23 42 / 0.14), 0 2px 8px rgb(15 23 42 / 0.06);
+
+  /* Inter default UI; Bricolage for display (see .font-display) */
+  --font-sans: 'Inter', 'Alexandria', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Alexandria', system-ui, sans-serif;
+  --font-arabic: 'Alexandria', system-ui, sans-serif;
+
+  /* ── Ticket Status — Full Palette ────────────────────────────── */
+  /* New (#7C3AED — Purple) */
+  --color-status-new: #7c3aed;
+  --color-status-new-bg: #f5f0ff;
+  --color-status-new-text: #6d28d9;
+  --color-status-new-border: #ddd6fe;
+  --color-status-new-hover: #ede9fe;
+  --color-status-new-selected: #e0d6ff;
+  --color-status-new-disabled: #a78bfa;
+  --color-status-new-icon: #7c3aed;
+
+  /* Open (#2563EB — Blue) */
+  --color-status-open: #2563eb;
+  --color-status-open-bg: #eff6ff;
+  --color-status-open-text: #1d4ed8;
+  --color-status-open-border: #bfdbfe;
+  --color-status-open-hover: #dbeafe;
+  --color-status-open-selected: #d4e4ff;
+  --color-status-open-disabled: #93c5fd;
+  --color-status-open-icon: #2563eb;
+
+  /* Pending (#EAB308 — Amber) */
+  --color-status-pending: #eab308;
+  --color-status-pending-bg: #fefce8;
+  --color-status-pending-text: #a16207;
+  --color-status-pending-border: #fef08a;
+  --color-status-pending-hover: #fef9c3;
+  --color-status-pending-selected: #fef3c7;
+  --color-status-pending-disabled: #fde047;
+  --color-status-pending-icon: #eab308;
+
+  /* Resolved (#10B981 — Green) */
+  --color-status-resolved: #10b981;
+  --color-status-resolved-bg: #ecfdf5;
+  --color-status-resolved-text: #047857;
+  --color-status-resolved-border: #a7f3d0;
+  --color-status-resolved-hover: #d1fae5;
+  --color-status-resolved-selected: #bbf7d0;
+  --color-status-resolved-disabled: #6ee7b7;
+  --color-status-resolved-icon: #10b981;
+
+  /* Closed (#6B7280 — Gray) */
+  --color-status-closed: #6b7280;
+  --color-status-closed-bg: #f9fafb;
+  --color-status-closed-text: #374151;
+  --color-status-closed-border: #e5e7eb;
+  --color-status-closed-hover: #f3f4f6;
+  --color-status-closed-selected: #e5e7eb;
+  --color-status-closed-disabled: #d1d5db;
+  --color-status-closed-icon: #6b7280;
+
+  /* Cancelled (#DC2626 — Red) */
+  --color-status-cancelled: #dc2626;
+  --color-status-cancelled-bg: #fef2f2;
+  --color-status-cancelled-text: #b91c1c;
+  --color-status-cancelled-border: #fecaca;
+  --color-status-cancelled-hover: #fee2e2;
+  --color-status-cancelled-selected: #fecaca;
+  --color-status-cancelled-disabled: #fca5a5;
+  --color-status-cancelled-icon: #dc2626;
+
+  /* ── Ticket Priority — Full Palette ──────────────────────────── */
+  /* Low (#2563EB — Blue) */
+  --color-priority-low: #2563eb;
+  --color-priority-low-bg: #eff6ff;
+  --color-priority-low-text: #1d4ed8;
+  --color-priority-low-border: #bfdbfe;
+  --color-priority-low-hover: #dbeafe;
+  --color-priority-low-selected: #d4e4ff;
+  --color-priority-low-disabled: #93c5fd;
+  --color-priority-low-icon: #2563eb;
+
+  /* Medium (#EAB308 — Amber) */
+  --color-priority-medium: #eab308;
+  --color-priority-medium-bg: #fefce8;
+  --color-priority-medium-text: #a16207;
+  --color-priority-medium-border: #fef08a;
+  --color-priority-medium-hover: #fef9c3;
+  --color-priority-medium-selected: #fef3c7;
+  --color-priority-medium-disabled: #fde047;
+  --color-priority-medium-icon: #eab308;
+
+  /* High (#F97316 — Orange) */
+  --color-priority-high: #f97316;
+  --color-priority-high-bg: #fff7ed;
+  --color-priority-high-text: #c2410c;
+  --color-priority-high-border: #fed7aa;
+  --color-priority-high-hover: #ffedd5;
+  --color-priority-high-selected: #fdba74;
+  --color-priority-high-disabled: #fb923c;
+  --color-priority-high-icon: #f97316;
+
+  /* Urgent (#DC2626 — Red) */
+  --color-priority-urgent: #dc2626;
+  --color-priority-urgent-bg: #fef2f2;
+  --color-priority-urgent-text: #b91c1c;
+  --color-priority-urgent-border: #fecaca;
+  --color-priority-urgent-hover: #fee2e2;
+  --color-priority-urgent-selected: #fca5a5;
+  --color-priority-urgent-disabled: #f87171;
+  --color-priority-urgent-icon: #dc2626;
+}

@@ -1,0 +1,122 @@
+/* Textarea System — ds-textarea
+   Natural companion to ds-input */
+@layer components {
+  /* Base textarea */
+  .ds-textarea {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--color-app-ink);
+    background: var(--color-app-page);
+    border: 1.5px solid var(--color-app-border);
+    border-radius: var(--radius-control);
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    caret-color: var(--color-primary-600);
+    text-align: start;
+    resize: vertical;
+  }
+
+  .ds-textarea::placeholder {
+    color: var(--color-app-muted);
+  }
+
+  /* Focus state */
+  .ds-textarea:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+  }
+
+  /* Error state */
+  .ds-textarea--error,
+  .ds-textarea.ds-textarea--error:focus {
+    border-color: var(--color-error-500);
+    box-shadow: 0 0 0 3px var(--color-focus-error);
+  }
+
+  /* Disabled state */
+  .ds-textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--color-app-surface);
+  }
+
+  /* Sizes */
+  .ds-textarea--sm {
+    padding: 7px 11px;
+    font-size: 13px;
+    min-height: 80px;
+  }
+
+  .ds-textarea--md {
+    padding: 9px 13px;
+    font-size: 13.5px;
+    min-height: 100px;
+  }
+
+  .ds-textarea--lg {
+    padding: 11px 15px;
+    font-size: 14px;
+    min-height: 120px;
+  }
+
+  /* Variants */
+  .ds-textarea--default {
+    background: white;
+  }
+
+  .ds-textarea--filled {
+    background: var(--color-app-surface);
+  }
+
+  .ds-textarea--ghost {
+    background: transparent;
+  }
+
+  /* Resize variants */
+  .ds-textarea--resize-none {
+    resize: none;
+  }
+
+  .ds-textarea--resize-vertical {
+    resize: vertical;
+  }
+
+  .ds-textarea--resize-horizontal {
+    resize: horizontal;
+  }
+
+  .ds-textarea--resize-both {
+    resize: both;
+  }
+
+  /* Wrapper for overlaying the character count inside the textarea */
+  .ds-textarea__wrap {
+    position: relative;
+  }
+
+  /* Reserve space at the bottom so the overlay never covers typed text */
+  .ds-textarea--has-count {
+    padding-bottom: 26px;
+  }
+
+  /* Character count */
+  .ds-textarea__char-count {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    font-size: 11px;
+    line-height: 1;
+    color: var(--color-app-muted);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .ds-textarea__char-count--error {
+    color: var(--color-error-500);
+    font-weight: 500;
+  }
+}

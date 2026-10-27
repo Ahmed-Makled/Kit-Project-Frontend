@@ -1,0 +1,57 @@
+<div class="ds-field">
+  @if (label() || labelKey()) {
+    <label [attr.for]="effectiveId()" class="ds-field__label">
+      @if (labelKey()) {
+        {{ labelKey() | translate }}
+      } @else {
+        {{ label() }}
+      }
+      @if (isRequired()) {
+        <span class="ds-field__required">*</span>
+      }
+    </label>
+  }
+  <div class="ds-textarea__wrap">
+    <textarea
+      [id]="effectiveId()"
+      [value]="value"
+      [rows]="rows()"
+      [attr.cols]="cols()"
+      [attr.maxlength]="maxlength()"
+      [attr.minlength]="minlength()"
+      [placeholder]="placeholderKey() ? (placeholderKey() | translate) : placeholder()"
+      [attr.aria-label]="label() || labelKey() ? null : ariaLabelKey() ? (ariaLabelKey() | translate) : ariaLabel() || null"
+      [disabled]="isDisabled()"
+      [attr.aria-invalid]="hasError() ? 'true' : null"
+      [attr.aria-required]="isRequired() ? 'true' : null"
+      [attr.aria-describedby]="hasError() ? effectiveId() + '-error' : null"
+      [class]="textareaClass()"
+      [class.ds-textarea--error]="hasError()"
+      (input)="onInputChange($event)"
+      (blur)="onBlur()"></textarea>
+    @if (showCharacterCount() && maxlength()) {
+      <div class="ds-textarea__char-count" [class.ds-textarea__char-count--error]="characterCount() > (maxlength() ?? 0)">
+        {{ characterCount() }}/{{ maxlength() }}
+      </div>
+    }
+  </div>
+  @if (hasError() && getErrorMessageKey(); as errorKey) {
+    <div class="ds-field__error" [id]="effectiveId() + '-error'" aria-live="polite">
+      <svg class="ds-field__error-icon" fill="currentColor" viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clip-rule="evenodd"></path>
+      </svg>
+      @if (isServerError()) {
+        <span>{{ errorKey }}</span>
+      } @else {
+        @if (getErrorMessageParams(); as params) {
+          <span>{{ errorKey | translate: params }}</span>
+        } @else {
+          <span>{{ errorKey | translate }}</span>
+        }
+      }
+    </div>
+  }
+</div>

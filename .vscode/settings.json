@@ -1,0 +1,19 @@
+{
+  "i18n-ally.localesPaths": ["public/assets/i18n"],
+  "svg.preview.background": "black",
+  "i18n-ally.keystyle": "nested",
+  "js/ts.referencesCodeLens.enabled": true,
+  "editor.codeLens": true,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": true,
+  "prettier.prettierPath": "./node_modules/prettier",
+  "[typescript][javascript][html][css][scss][json][jsonc][markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

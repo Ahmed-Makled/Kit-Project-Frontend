@@ -1,0 +1,21 @@
+/* Component styles - organized by domain */
+
+/* UI Components */
+@import './buttons.css';
+@import './toggles.css';
+
+/* Layout Components */
+@import './cdk.css';
+@import './sidebar.css';
+@import './shell.css';
+
+/* Data Display Components */
+@import './cards.css';
+@import './badges.css';
+
+/* Form Components */
+@import './inputs.css';
+@import './selects.css';
+@import './textarea.css';
+@import './checkbox.css';
+@import './radio.css';

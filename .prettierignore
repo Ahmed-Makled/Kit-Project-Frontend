@@ -1,0 +1,16 @@
+node_modules/
+.angular/
+dist/
+out-tsc/
+coverage/
+tmp/
+bazel-out/
+.git/
+.agents/
+.codex/
+.aws/
+.env*
+.vscode/mcp.json
+package-lock.json
+public/images/
+*.min.*

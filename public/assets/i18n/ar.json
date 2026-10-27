@@ -1,0 +1,208 @@
+{
+  "SHARED": {
+    "DIALOG": "نافذة حوار",
+    "ACTIONS": {
+      "CANCEL": "إلغاء",
+      "ACTIVATE": "تفعيل",
+      "DEACTIVATE": "تعطيل",
+      "DELETE": "حذف",
+      "EDIT": "تعديل",
+      "ADD": "إضافة",
+      "CREATE": "إنشاء",
+      "UPDATE": "تحديث",
+      "SAVE": "حفظ",
+      "BACK": "رجوع",
+      "SELECT": "اختر",
+      "RESET_PASSWORD": "إعادة تعيين كلمة المرور",
+      "OPEN_DATE_PICKER": "فتح منتقي التاريخ",
+      "PREVIOUS_MONTH": "الشهر السابق",
+      "NEXT_MONTH": "الشهر التالي",
+      "PREVIOUS_YEARS": "السنوات السابقة",
+      "NEXT_YEARS": "السنوات التالية",
+      "SELECT_YEAR": "اختر السنة",
+      "TODAY": "اليوم",
+      "CLEAR": "مسح",
+      "CLOSE": "إغلاق",
+      "TOGGLE_GROUP": "توسيع المجموعة أو طيها",
+      "SEARCH": "بحث",
+      "RETRY": "إعادة المحاولة"
+    },
+    "STATUS": {
+      "ACTIVE": "نشط",
+      "INACTIVE": "غير نشط",
+      "LOADING": "جاري التحميل..."
+    },
+    "FIELDS": {
+      "NAME": "الاسم",
+      "FIRST_NAME": "الاسم الأول",
+      "LAST_NAME": "اسم العائلة",
+      "USERNAME": "اسم المستخدم",
+      "EMAIL": "البريد الإلكتروني",
+      "PASSWORD": "كلمة المرور",
+      "ROLE": "الدور",
+      "STATUS": "الحالة",
+      "ACTIONS": "الإجراءات"
+    },
+    "PLACEHOLDERS": {
+      "PASSWORD": "أدخل كلمة المرور",
+      "USERNAME": "أدخل اسم المستخدم",
+      "EMAIL": "أدخل البريد الإلكتروني",
+      "SEARCH": "البحث..."
+    },
+    "MESSAGES": {
+      "CONFIRM_DELETE_MESSAGE": "هل أنت متأكد من أنك تريد حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء.",
+      "CONFIRM_DELETE_MESSAGE_PART1": "هل أنت متأكد من أنك تريد حذف",
+      "CONFIRM_DELETE_MESSAGE_PART2": "؟ لا يمكن التراجع عن هذا الإجراء.",
+      "SUCCESS": "تمت العملية بنجاح"
+    },
+    "ERRORS": {
+      "TRY_AGAIN": "يرجى المحاولة مجدداً",
+      "GENERIC": "حدث خطأ",
+      "UPLOAD_TIMEOUT": "استغرق رفع الملف وقتًا طويلاً. يرجى المحاولة مرة أخرى."
+    },
+    "PAGINATION": {
+      "LABEL": "التنقل بين الصفحات",
+      "SHOWING": "عرض",
+      "TO": "إلى",
+      "OF": "من",
+      "RESULTS": "نتيجة",
+      "ROWS_PER_PAGE": "صفوف لكل صفحة",
+      "PAGE": "صفحة",
+      "PREVIOUS": "السابق",
+      "NEXT": "التالي",
+      "ELLIPSIS": "...",
+      "GO_TO_PAGE": "الذهاب إلى الصفحة",
+      "GO_TO_PREVIOUS": "الذهاب إلى الصفحة السابقة",
+      "GO_TO_NEXT": "الذهاب إلى الصفحة التالية",
+      "GO_TO_FIRST_PAGE": "الذهاب إلى الصفحة الأولى",
+      "GO_TO_LAST_PAGE": "الذهاب إلى الصفحة الأخيرة"
+    },
+    "NO_RESULTS": "لا توجد نتائج"
+  },
+  "AUTH": {
+    "APP_NAME": "مشروع كيت",
+    "PRODUCT_NAME": "مشروع كيت",
+    "CENTER_NAME": "مساحة العمل التجريبية",
+    "LOGIN_BRANDING": {
+      "DOCTOR_NAME": "Kit Project",
+      "CLINIC_NAME": "Starter Workspace",
+      "DOCTOR_NAME_AR": "مشروع كيت"
+    },
+    "LOGIN_EYEBROW": "بوابة الموظفين",
+    "LOGIN": "مرحباً بعودتك",
+    "LOGIN_BUTTON": "تسجيل الدخول",
+    "LOGGING_IN": "جاري تسجيل الدخول...",
+    "LOGIN_INSTRUCTION": "سجّل الدخول للوصول إلى مساحة العمل.",
+    "SIGN_IN_FOOTER_TERMS": "لمستخدمي مساحة العمل المصرح لهم فقط. يعتمد الوصول على دورك.",
+    "TOGGLE_PASSWORD_VISIBILITY": "إظهار كلمة المرور أو إخفاؤها",
+    "LOGOUT": "تسجيل الخروج",
+    "ALL_RIGHTS_RESERVED": "جميع الحقوق محفوظة",
+    "FIELDS": {
+      "USERNAME": "اسم المستخدم",
+      "USERNAME_PLACEHOLDER": "أدخل اسم المستخدم",
+      "PASSWORD": "كلمة المرور",
+      "PASSWORD_PLACEHOLDER": "أدخل كلمة المرور"
+    },
+    "VALIDATION": {
+      "USERNAME_REQUIRED": "اسم المستخدم مطلوب",
+      "PASSWORD_REQUIRED": "كلمة المرور مطلوبة",
+      "PASSWORD_MIN_LENGTH": "يجب أن تكون كلمة المرور {{minLength}} أحرف على الأقل"
+    },
+    "MARKETING": {
+      "EYEBROW": "مشروع كيت · بوابة الموظفين",
+      "HEADLINE_LINE1": "أنجز العمل أسرع",
+      "HEADLINE_LINE2": "من مساحة عمل",
+      "HEADLINE_ACCENT": "واضحة.",
+      "SUBHEADLINE": "سجّل الدخول لإدارة الفريق والأدوار والصلاحيات من مكان واحد.",
+      "DIAGRAM_SOURCE": "المصدر",
+      "DIAGRAM_CODE_LINE1": "workspace.ready",
+      "DIAGRAM_CODE_LINE2": "access: granted",
+      "DIAGRAM_TARGET": "الشاشة",
+      "FEATURE_FAST_TITLE": "بداية سريعة",
+      "FEATURE_FAST_DESC": "صل إلى عملك بخطوات قليلة.",
+      "FEATURE_STRUCTURE_TITLE": "هيكل واضح",
+      "FEATURE_STRUCTURE_DESC": "الأدوار والصلاحيات تبقى منظمة.",
+      "FEATURE_UX_TITLE": "واجهة متسقة",
+      "FEATURE_UX_DESC": "نفس الأنماط في كل الشاشات."
+    },
+    "DIVIDER_OR_CONTINUE": "أو المتابعة باستخدام",
+    "CONTINUE_WITH_GOOGLE": "المتابعة باستخدام Google",
+    "WORKFLOW": {
+      "LABEL": "مسار عمل مساحة المستخدمين",
+      "PLAN_TITLE": "التخطيط",
+      "PLAN_DESC": "تنظيم العمل بسهولة.",
+      "ASSIGN_TITLE": "إدارة المهام",
+      "ASSIGN_DESC": "الحفاظ على سير العمل بسلاسة.",
+      "PROGRESS_TITLE": "التقدم",
+      "PROGRESS_DESC": "متابعة العمل من مكان واحد.",
+      "ON_TRACK": "جاهز"
+    },
+    "SECURITY": {
+      "TITLE": "بوابة آمنة لمستخدمي مساحة العمل المصرح لهم",
+      "DESC": "وصول آمن إلى بيانات فريقك.",
+      "DIVIDER": "أو"
+    }
+  },
+  "NAVIGATION": {
+    "SECTION_CLINIC": "العيادة",
+    "USERS": "المستخدمون",
+    "SECTION_SETTINGS": "الإعدادات",
+    "TOGGLE_MENU": "تبديل القائمة"
+  },
+  "MAIN_LAYOUT": {
+    "MAIN_NAV": "التنقل الرئيسي",
+    "LANGUAGE": "اللغة",
+    "LANGUAGE_EN": "الإنجليزية",
+    "LANGUAGE_AR": "العربية"
+  },
+  "USERS": {
+    "PAGE_SUBTITLE": "إدارة أعضاء الفريق والأدوار وصلاحيات الوصول.",
+    "CREATE_USER": "إضافة مستخدم جديد",
+    "EDIT_USER": "تعديل المستخدم",
+    "NO_USERS": "لم يتم العثور على مستخدمين. أضف المستخدم الأول!",
+    "SEARCH_LABEL": "بحث",
+    "SEARCH_PLACEHOLDER": "ابحث بالاسم  أو البريد الإلكتروني...",
+    "SEARCH_USERNAME_PLACEHOLDER": "ابحث حسب اسم المستخدم...",
+    "DELETE_CONFIRM": "هل أنت متأكد من حذف هذا المستخدم؟",
+    "CONFIRM_ACTIVATE_TITLE": "تأكيد تفعيل المستخدم",
+    "CONFIRM_ACTIVATE_MESSAGE": "هل تريد تفعيل هذا المستخدم؟",
+    "CONFIRM_DEACTIVATE_TITLE": "تأكيد تعطيل المستخدم",
+    "CONFIRM_DEACTIVATE_MESSAGE": "هل تريد تعطيل هذا المستخدم؟ يمكنك إعادة تفعيله لاحقاً.",
+    "FIELDS": {
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور"
+    },
+    "ROLES": {
+      "ADMIN": "مدير",
+      "USER": "مستخدم"
+    },
+    "ERRORS": {
+      "PASSWORDS_DO_NOT_MATCH": "كلمتا المرور غير متطابقتين",
+      "LOAD_FAILED": "تعذر تحميل بيانات المستخدم"
+    },
+    "FORM": {
+      "EYEBROW_CREATE": "المستخدمون / جديد",
+      "EYEBROW_EDIT": "المستخدمون / تعديل",
+      "SUBTITLE_CREATE": "أدخل التفاصيل أدناه لإنشاء حساب عضو فريق جديد.",
+      "SUBTITLE_EDIT": "أدخل التفاصيل أدناه لتحديث حساب عضو الفريق.",
+      "SECTION_PERSONAL": "المعلومات الشخصية",
+      "SECTION_PERSONAL_SUBTITLE": "تفاصيل الهوية والتواصل الأساسية",
+      "SECTION_WORK": "تفاصيل العمل",
+      "SECTION_WORK_SUBTITLE": "معلومات الدور والمؤسسة"
+    }
+  },
+  "SEARCH": {
+    "APPLY": "تطبيق البحث"
+  },
+  "FILTER": {
+    "ALL": "الكل"
+  },
+  "VALIDATION": {
+    "REQUIRED": "هذا الحقل مطلوب",
+    "FIELD_CANNOT_BE_EMPTY": "هذا الحقل لا يمكن أن يكون فارغاً",
+    "MIN_LENGTH": "يجب أن يكون هذا الحقل {{minLength}} أحرف على الأقل",
+    "MAX_LENGTH": "يجب ألا يتجاوز هذا الحقل {{maxLength}} حرف"
+  },
+  "ERRORS": {
+    "UNAUTHORIZED": "ليست لديك صلاحية"
+  }
+}

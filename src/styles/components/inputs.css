@@ -1,0 +1,618 @@
+/* Form Field System — ds-field / ds-input
+   Matches templates/app-layout-users.html input styling */
+@layer components {
+  /* Field wrapper */
+  .ds-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  /* Label sizing per template (compact, 11-12px) */
+  .ds-field__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-app-body);
+    line-height: 1.4;
+  }
+
+  .ds-field__required {
+    color: var(--color-error-500);
+    font-weight: 600;
+  }
+
+  /* Error message */
+  .ds-field__error {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-error-600);
+  }
+
+  .ds-field__error-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Base input (matches modal-input from template) */
+  .ds-input {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--color-app-ink);
+    background: var(--color-app-page);
+    border: 1.5px solid var(--color-app-border);
+    border-radius: var(--radius-control);
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    caret-color: var(--color-primary-600);
+    text-align: start;
+  }
+
+  .ds-input::placeholder {
+    color: var(--color-app-muted);
+  }
+
+  /* Focus state — soft indigo ring per template */
+  .ds-input:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+  }
+
+  /* Error state */
+  .ds-input--error,
+  .ds-input.ds-input--error:focus {
+    border-color: var(--color-error-500);
+    box-shadow: 0 0 0 3px var(--color-focus-error);
+  }
+
+  /* Disabled state */
+  .ds-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--color-app-surface);
+  }
+
+  /* Sizes */
+  .ds-input--sm {
+    height: 36px;
+    padding: 7px 11px;
+    font-size: 13px;
+  }
+
+  .ds-input--md {
+    height: 40px;
+    padding: 9px 13px;
+    font-size: 13.5px;
+  }
+
+  .ds-input--lg {
+    height: 48px;
+    padding: 11px 15px;
+    font-size: 14px;
+  }
+
+  /* Variants */
+  .ds-input--default {
+    background: white;
+  }
+
+  .ds-input--filled {
+    background: var(--color-app-surface);
+  }
+
+  .ds-input--ghost {
+    background: transparent;
+  }
+
+  /* Date fields use a compact action surface for a clearer picker affordance. */
+  .ds-input--date {
+    padding-inline-end: 44px;
+    color-scheme: light;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ds-input--date:read-only:not(:disabled) {
+    cursor: pointer;
+  }
+
+  .ds-input--date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .ds-input--has-date-toggle.ds-input--sm {
+    padding-inline-end: 44px;
+  }
+  .ds-input--has-date-toggle.ds-input--md {
+    padding-inline-end: 48px;
+  }
+  .ds-input--has-date-toggle.ds-input--lg {
+    padding-inline-end: 56px;
+  }
+
+  /* Icon padding modifiers */
+  .ds-input--has-start-icon.ds-input--sm {
+    padding-inline-start: 36px;
+  }
+  .ds-input--has-start-icon.ds-input--md {
+    padding-inline-start: 40px;
+  }
+  .ds-input--has-start-icon.ds-input--lg {
+    padding-inline-start: 48px;
+  }
+
+  .ds-input--has-end-icon.ds-input--sm {
+    padding-inline-end: 36px;
+  }
+  .ds-input--has-end-icon.ds-input--md {
+    padding-inline-end: 40px;
+  }
+  .ds-input--has-end-icon.ds-input--lg {
+    padding-inline-end: 48px;
+  }
+
+  .ds-input--has-password-toggle.ds-input--sm {
+    padding-inline-end: 44px;
+  }
+  .ds-input--has-password-toggle.ds-input--md {
+    padding-inline-end: 48px;
+  }
+  .ds-input--has-password-toggle.ds-input--lg {
+    padding-inline-end: 56px;
+  }
+
+  /* Icon containers */
+  .ds-input__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-app-muted);
+    pointer-events: none;
+  }
+
+  .ds-input__icon--start {
+    inset-inline-start: 11px;
+  }
+  .ds-input__icon--end {
+    inset-inline-end: 11px;
+  }
+
+  /* Icon sizing per input size */
+  .ds-input__icon--sm .ds-input__icon-svg {
+    width: 16px;
+    height: 16px;
+  }
+  .ds-input__icon--md .ds-input__icon-svg {
+    width: 18px;
+    height: 18px;
+  }
+  .ds-input__icon--lg .ds-input__icon-svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Password toggle button */
+  .ds-input__password-toggle {
+    position: absolute;
+    top: 50%;
+    inset-inline-end: 8px;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    color: var(--color-app-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .ds-input__password-toggle:hover {
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+    border-color: var(--color-app-border-accent);
+  }
+
+  .ds-input__password-toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary-300);
+  }
+
+  .ds-input__password-toggle:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .ds-input__password-toggle svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Date picker toggle */
+  .ds-input__date-toggle {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    inset-inline-end: 4px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    border: 0;
+    border-inline-start: 1px solid var(--color-app-border);
+    border-radius: 0 7px 7px 0;
+    color: var(--color-primary-600);
+    background: linear-gradient(180deg, var(--color-primary-50), white);
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  html[dir='rtl'] .ds-input__date-toggle {
+    border-radius: 7px 0 0 7px;
+  }
+
+  .ds-input__date-toggle:hover {
+    color: var(--color-primary-700);
+    background: var(--color-primary-100);
+    border-inline-start-color: var(--color-app-border-accent);
+  }
+
+  .ds-input__date-toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary-300);
+  }
+
+  .ds-input__date-toggle:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .ds-input__date-toggle svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+  }
+
+  .ds-input--lg ~ .ds-input__date-toggle svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  /* Shared in-app calendar popover */
+  .ds-date-picker {
+    position: absolute;
+    top: calc(100% + 8px);
+    inset-inline-start: 0;
+    z-index: 1000;
+    width: min(312px, calc(100vw - 32px));
+    padding: 12px;
+    border: 1px solid var(--color-app-border-accent);
+    border-radius: var(--radius-card);
+    background: white;
+    box-shadow:
+      var(--shadow-dropdown),
+      0 0 0 4px var(--color-primary-50);
+    color: var(--color-app-ink);
+    animation: ds-date-picker-enter 0.16s ease-out;
+  }
+
+  @keyframes ds-date-picker-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .ds-date-picker--top {
+    top: auto;
+    bottom: calc(100% + 8px);
+    animation: ds-date-picker-enter-top 0.16s ease-out;
+  }
+
+  @keyframes ds-date-picker-enter-top {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .ds-date-picker__header {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) 32px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .ds-date-picker__title {
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ds-date-picker__title-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    padding: 5px 7px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: var(--color-app-ink);
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .ds-date-picker__title-button:hover {
+    border-color: var(--color-primary-200);
+    color: var(--color-primary-700);
+    background: var(--color-primary-50);
+  }
+
+  .ds-date-picker__title-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-primary-100);
+  }
+
+  .ds-date-picker__title-button svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .ds-date-picker__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-app-border);
+    border-radius: 9px;
+    color: var(--color-app-body);
+    background: var(--color-app-page);
+    cursor: pointer;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .ds-date-picker__nav:hover {
+    border-color: var(--color-primary-300);
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+  }
+
+  .ds-date-picker__nav:focus-visible,
+  .ds-date-picker__day:focus-visible,
+  .ds-date-picker__month:focus-visible,
+  .ds-date-picker__today:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-primary-100);
+  }
+
+  .ds-date-picker__nav svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  html[dir='rtl'] .ds-date-picker__nav:first-child svg,
+  html[dir='rtl'] .ds-date-picker__nav:last-child svg {
+    transform: scaleX(-1);
+  }
+
+  .ds-date-picker__years {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .ds-date-picker__year {
+    min-height: 38px;
+    border: 1px solid var(--color-app-border);
+    border-radius: 9px;
+    color: var(--color-app-body);
+    background: var(--color-app-page);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .ds-date-picker__year:hover {
+    border-color: var(--color-primary-200);
+    color: var(--color-primary-700);
+    background: var(--color-primary-50);
+  }
+
+  .ds-date-picker__year--selected {
+    border-color: var(--color-primary-600);
+    color: white;
+    background: var(--color-primary-600);
+    box-shadow: 0 4px 10px rgb(37 99 235 / 0.22);
+  }
+
+  .ds-date-picker__year--selected:hover {
+    border-color: var(--color-primary-700);
+    color: white;
+    background: var(--color-primary-700);
+  }
+
+  .ds-date-picker__weekdays,
+  .ds-date-picker__days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .ds-date-picker__weekdays {
+    margin-bottom: 5px;
+    color: var(--color-app-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .ds-date-picker__day {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 34px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: var(--color-app-body);
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .ds-date-picker__day:hover {
+    border-color: var(--color-primary-200);
+    color: var(--color-primary-700);
+    background: var(--color-primary-50);
+  }
+
+  .ds-date-picker__day--muted {
+    color: var(--color-app-muted);
+    opacity: 0.6;
+  }
+
+  .ds-date-picker__day--today {
+    border-color: var(--color-primary-200);
+    color: var(--color-primary-700);
+  }
+
+  .ds-date-picker__day--selected {
+    border-color: var(--color-primary-600);
+    color: white;
+    background: var(--color-primary-600);
+    box-shadow: 0 4px 10px rgb(37 99 235 / 0.22);
+  }
+
+  .ds-date-picker__day--selected:hover {
+    border-color: var(--color-primary-700);
+    color: white;
+    background: var(--color-primary-700);
+  }
+
+  .ds-date-picker__months {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .ds-date-picker__month {
+    min-height: 38px;
+    padding: 5px 4px;
+    border: 1px solid var(--color-app-border);
+    border-radius: 9px;
+    color: var(--color-app-body);
+    background: var(--color-app-page);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .ds-date-picker__month:hover {
+    border-color: var(--color-primary-200);
+    color: var(--color-primary-700);
+    background: var(--color-primary-50);
+  }
+
+  .ds-date-picker__month--selected {
+    border-color: var(--color-primary-600);
+    color: var(--color-primary-700);
+    background: var(--color-primary-50);
+  }
+
+  .ds-date-picker__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-app-border);
+  }
+
+  .ds-date-picker__today {
+    min-height: 28px;
+    padding: 4px 12px;
+    border: 0;
+    border-radius: 8px;
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .ds-date-picker__today:hover {
+    color: var(--color-primary-700);
+    background: var(--color-primary-100);
+  }
+}

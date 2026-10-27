@@ -1,0 +1,188 @@
+<div class="flex items-center justify-center sm:justify-between text-nowrap flex-wrap gap-y-1 px-6 py-4 border-t border-gray-200">
+  <!-- Results Info -->
+  <div class="text-sm text-neutral-600 font-medium leading-5">
+    {{ 'SHARED.PAGINATION.SHOWING' | translate }}
+    (
+    {{ firstItem() }}
+    {{ 'SHARED.PAGINATION.TO' | translate }}
+    {{ Math.min(pageIndex() * pageSizeLinked(), totalItems()) }}
+    )
+    {{ 'SHARED.PAGINATION.OF' | translate }}
+    {{ totalItems() }}
+    {{ 'SHARED.PAGINATION.RESULTS' | translate }}
+  </div>
+
+  <nav
+    role="navigation"
+    [attr.aria-label]="'SHARED.PAGINATION.LABEL' | translate"
+    class="flex flex-row items-center gap-8 text-nowrap flex-wrap gap-y-1 justify-center">
+    @if (showPageSizeOptions()) {
+      <div class="flex flex-row items-center gap-2">
+        <p class="text-sm text-neutral-900 font-medium leading-5">
+          {{ 'SHARED.PAGINATION.ROWS_PER_PAGE' | translate }}
+        </p>
+
+        <div class="relative">
+          <button
+            type="button"
+            [attr.aria-label]="'SHARED.PAGINATION.ROWS_PER_PAGE' | translate"
+            [attr.aria-expanded]="isPageSizeOptionsOpen()"
+            (keydown.escape)="isPageSizeOptionsOpen.set(false)"
+            (click)="isPageSizeOptionsOpen.set(!isPageSizeOptionsOpen())"
+            class="bg-white py-2 px-3 border border-neutral-100 gap-2 rounded-lg cursor-pointer flex flex-row items-center justify-center text-sm leading-4">
+            {{ pageSizeLinked() }}
+            <svg class="size-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          @if (isPageSizeOptionsOpen()) {
+            <ul
+              appClickOutside
+              (clickOutside)="isPageSizeOptionsOpen.set(false)"
+              class="bg-white absolute bottom-full start-0 flex flex-col gap-1.5 p-2 rounded-lg shadow-md text-center w-16 z-9999 border border-neutral-100">
+              @for (size of pageSizeOptions(); track $index) {
+                <li>
+                  <button
+                    type="button"
+                    (click)="setPageSize(size)"
+                    class="w-full text-sm text-center text-neutral-900 font-medium leading-5 hover:bg-neutral-100 rounded-sm cursor-pointer py-1">
+                    {{ size }}
+                  </button>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="text-sm text-neutral-900 font-medium leading-5">
+      {{ 'SHARED.PAGINATION.PAGE' | translate }} {{ pageIndex() }} {{ 'SHARED.PAGINATION.OF' | translate }} {{ totalPages() }}
+    </div>
+
+    @if (showPagesNumbers()) {
+      <ul class="flex flex-row items-center gap-1">
+        <!-- Previous Button -->
+        <li>
+          <button
+            type="button"
+            [disabled]="pageIndex() <= 1"
+            (click)="goToPage(pageIndex() - 1)"
+            [class.pointer-events-none]="pageIndex() === 1"
+            [class.opacity-50]="pageIndex() === 1"
+            class="inline-flex h-9 items-center justify-center gap-1 rounded-md border border-app-border bg-white px-4 py-2 text-sm font-medium text-app-body cursor-pointer hover:bg-app-surface hover:text-app-ink select-none"
+            [attr.aria-label]="'SHARED.PAGINATION.GO_TO_PREVIOUS' | translate">
+            <img src="/images/icons/arrow-left.svg" class="h-4 w-4 shrink-0 rtl:rotate-180" alt="" aria-hidden="true" />
+            <span>{{ 'SHARED.PAGINATION.PREVIOUS' | translate }}</span>
+          </button>
+        </li>
+
+        <!-- Page Numbers -->
+        @for (page of getVisiblePages(); track $index) {
+          <li>
+            @if (page === -1) {
+              <span class="px-2 text-gray-400"> {{ 'SHARED.PAGINATION.ELLIPSIS' | translate }}</span>
+            } @else {
+              <button
+                type="button"
+                [attr.aria-current]="pageIndex() === page ? 'page' : null"
+                (click)="goToPage(page)"
+                [class]="
+                  pageIndex() === page
+                    ? 'inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary-600 text-white border border-primary-600 cursor-pointer select-none'
+                    : 'inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-primary-50 hover:text-primary-700 border border-app-border bg-white text-app-body cursor-pointer select-none'
+                "
+                [attr.aria-label]="('SHARED.PAGINATION.GO_TO_PAGE' | translate) + ' ' + page">
+                {{ page }}
+              </button>
+            }
+          </li>
+        }
+
+        <!-- Next Button -->
+        <li>
+          <button
+            type="button"
+            [disabled]="pageIndex() >= totalPages()"
+            (click)="goToPage(pageIndex() + 1)"
+            [class.pointer-events-none]="pageIndex() >= totalPages()"
+            [class.opacity-50]="pageIndex() >= totalPages()"
+            class="inline-flex h-9 items-center justify-center gap-1 rounded-md border border-app-border bg-white px-4 py-2 text-sm font-medium text-app-body cursor-pointer hover:bg-app-surface hover:text-app-ink select-none"
+            [attr.aria-label]="'SHARED.PAGINATION.GO_TO_NEXT' | translate">
+            <span>{{ 'SHARED.PAGINATION.NEXT' | translate }}</span>
+            <img src="/images/icons/arrow-right.svg" class="h-4 w-4 shrink-0 rtl:rotate-180" alt="" aria-hidden="true" />
+          </button>
+        </li>
+      </ul>
+    } @else {
+      <ul class="flex flex-row items-center gap-1">
+        <!-- First Page Button -->
+        <li>
+          <button
+            type="button"
+            [disabled]="pageIndex() <= 1"
+            [attr.aria-label]="'SHARED.PAGINATION.GO_TO_FIRST_PAGE' | translate"
+            (click)="goToPage(1)"
+            [class.pointer-events-none]="pageIndex() === 1"
+            [class.opacity-50]="pageIndex() === 1"
+            class="inline-flex items-center justify-center gap-1 size-8 rounded-lg border border-app-border bg-white p-2 text-primary-600 cursor-pointer select-none"
+            [attr.title]="'SHARED.PAGINATION.GO_TO_FIRST_PAGE' | translate">
+            <span class="flex items-center" aria-hidden="true">
+              <img src="/images/icons/arrow-left.svg" class="h-3.5 w-3.5 shrink-0 rtl:rotate-180" alt="" />
+              <img src="/images/icons/arrow-left.svg" class="-ms-1 h-3.5 w-3.5 shrink-0 rtl:rotate-180" alt="" />
+            </span>
+          </button>
+        </li>
+
+        <!-- Previous Button -->
+        <li>
+          <button
+            type="button"
+            [disabled]="pageIndex() <= 1"
+            [attr.aria-label]="'SHARED.PAGINATION.GO_TO_PREVIOUS' | translate"
+            (click)="goToPage(pageIndex() - 1)"
+            [class.pointer-events-none]="pageIndex() === 1"
+            [class.opacity-50]="pageIndex() === 1"
+            class="inline-flex items-center justify-center gap-1 size-8 rounded-lg border border-app-border bg-white p-2 text-primary-600 cursor-pointer select-none"
+            [attr.title]="'SHARED.PAGINATION.GO_TO_PREVIOUS' | translate">
+            <img src="/images/icons/arrow-left.svg" class="h-4 w-4 shrink-0 rtl:rotate-180" alt="" aria-hidden="true" />
+          </button>
+        </li>
+
+        <!-- Next Button -->
+        <li>
+          <button
+            type="button"
+            [disabled]="pageIndex() >= totalPages()"
+            [attr.aria-label]="'SHARED.PAGINATION.GO_TO_NEXT' | translate"
+            (click)="goToPage(pageIndex() + 1)"
+            [class.pointer-events-none]="pageIndex() >= totalPages()"
+            [class.opacity-50]="pageIndex() >= totalPages()"
+            class="inline-flex items-center justify-center gap-1 size-8 rounded-lg border border-app-border bg-white p-2 text-primary-600 cursor-pointer select-none"
+            [attr.title]="'SHARED.PAGINATION.GO_TO_NEXT' | translate">
+            <img src="/images/icons/arrow-right.svg" class="h-4 w-4 shrink-0 rtl:rotate-180" alt="" aria-hidden="true" />
+          </button>
+        </li>
+
+        <!-- Last Page Button -->
+        <li>
+          <button
+            type="button"
+            [disabled]="pageIndex() >= totalPages()"
+            [attr.aria-label]="'SHARED.PAGINATION.GO_TO_LAST_PAGE' | translate"
+            (click)="goToPage(totalPages())"
+            [class.pointer-events-none]="pageIndex() >= totalPages()"
+            [class.opacity-50]="pageIndex() >= totalPages()"
+            class="inline-flex items-center justify-center gap-1 size-8 rounded-lg border border-app-border bg-white p-2 text-primary-600 cursor-pointer select-none"
+            [attr.title]="'SHARED.PAGINATION.GO_TO_LAST_PAGE' | translate">
+            <span class="flex items-center" aria-hidden="true">
+              <img src="/images/icons/arrow-right.svg" class="h-3.5 w-3.5 shrink-0 rtl:rotate-180" alt="" />
+              <img src="/images/icons/arrow-right.svg" class="-ms-1 h-3.5 w-3.5 shrink-0 rtl:rotate-180" alt="" />
+            </span>
+          </button>
+        </li>
+      </ul>
+    }
+  </nav>
+</div>

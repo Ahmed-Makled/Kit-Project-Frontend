@@ -1,0 +1,257 @@
+<div class="ds-table-card">
+  <!-- Filter Form -->
+  @if (page().searchForm(); as searchForm) {
+    <div class="border-b border-app-border p-4 lg:p-4.5">
+      <form
+        [formGroup]="searchForm"
+        (ngSubmit)="onSearchClicked()"
+        class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-[1fr_1fr_1fr_1fr_auto] md:items-end">
+        <app-input formControlName="Search" labelKey="USERS.SEARCH_LABEL" placeholderKey="USERS.SEARCH_PLACEHOLDER" [control]="searchForm.get('Search')" />
+
+        <app-input
+          formControlName="Username"
+          labelKey="SHARED.FIELDS.USERNAME"
+          placeholderKey="USERS.SEARCH_USERNAME_PLACEHOLDER"
+          [control]="searchForm.get('Username')" />
+
+        <app-dropdown
+          formControlName="IsActive"
+          labelKey="SHARED.FIELDS.STATUS"
+          placeholderKey="FILTER.ALL"
+          [options]="statusList()"
+          [control]="searchForm.get('IsActive')"
+          searchPlaceholderKey="SHARED.PLACEHOLDERS.SEARCH"
+          noResultsTextKey="SHARED.NO_RESULTS" />
+        <app-dropdown
+          formControlName="Role"
+          labelKey="SHARED.FIELDS.ROLE"
+          placeholderKey="FILTER.ALL"
+          [options]="roleList()"
+          [control]="searchForm.get('Role')"
+          searchPlaceholderKey="SHARED.PLACEHOLDERS.SEARCH"
+          noResultsTextKey="SHARED.NO_RESULTS" />
+        <button type="submit" class="btn btn-secondary btn-sm whitespace-nowrap max-w-max">
+          <img src="/images/icons/search-gray-grad.svg" class="h-5 w-5 shrink-0" alt="" aria-hidden="true" />
+          {{ 'SEARCH.APPLY' | translate }}
+        </button>
+      </form>
+    </div>
+  }
+
+  <!-- Table -->
+  @if (page().isLoading() || page().isSearching()) {
+    <app-spinner />
+  } @else if (items().length === 0) {
+    <app-empty-state titleKey="USERS.NO_USERS" />
+  } @else {
+    <div class="overflow-x-auto">
+      <table class="ds-table">
+        <thead>
+          <tr>
+            @for (column of page().columns(); track column.Name) {
+              <th scope="col" class="ds-th" [class.ds-th--sortable]="column.Sortable" [attr.aria-sort]="sortDirection(column)">
+                @if (column.Sortable) {
+                  <button type="button" class="ds-table-sort" (click)="onSortClicked(column)">
+                    <span class="inline-flex items-center gap-1">
+                      {{ column.Title | translate }}
+
+                      @if (column.Name === page().orderBy() && page().isAscending()) {
+                        <img src="/images/icons/sort-ascending-primary.svg" class="h-3 w-3 shrink-0" alt="" aria-hidden="true" />
+                      } @else if (column.Name === page().orderBy()) {
+                        <img src="/images/icons/sort-descending-primary.svg" class="h-3 w-3 shrink-0" alt="" aria-hidden="true" />
+                      } @else {
+                        <img src="/images/icons/sort-unsorted.svg" class="h-3 w-3 shrink-0" alt="" aria-hidden="true" />
+                      }
+                    </span>
+                  </button>
+                } @else {
+                  <span>{{ column.Title | translate }}</span>
+                }
+              </th>
+            }
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (user of items(); track user.Id; let index = $index) {
+            <tr class="ds-tr">
+              <td class="ds-td">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-app-surface text-sm font-medium text-app-body">
+                  {{ (page().options().PageIndex - 1) * page().options().PageSize + index + 1 }}
+                </div>
+              </td>
+              <td class="ds-td">
+                <span class="font-medium text-app-ink">{{ user.FirstName }} {{ user.LastName }}</span>
+              </td>
+              <td class="ds-td">{{ user.Username }}</td>
+              <td class="ds-td">{{ user.Email }}</td>
+              <td class="ds-td">
+                <app-badge [variant]="roleBadgeVariant(user.Role)" [labelKey]="roleTranslationKey(user.Role)" />
+              </td>
+              <td class="ds-td">
+                <app-toggle
+                  [checked]="user.IsActive"
+                  [disabled]="page().isSaving() || page().isLoading() || page().isSearching()"
+                  (change)="showChangeStatusModal(user)"
+                  size="sm"
+                  variant="success"
+                  [label]="(user.IsActive ? 'SHARED.STATUS.ACTIVE' : 'SHARED.STATUS.INACTIVE') | translate" />
+              </td>
+              <td class="ds-td">
+                <div class="flex items-center justify-end gap-1">
+                  <button
+                    type="button"
+                    class="ds-row-action ds-row-action--info"
+                    (click)="goToEditUser(user)"
+                    [attr.aria-label]="'SHARED.ACTIONS.EDIT' | translate"
+                    [attr.title]="'SHARED.ACTIONS.EDIT' | translate">
+                    <img src="/images/icons/edit-gray-grad.svg" class="action-icon action-icon--idle" alt="" aria-hidden="true" />
+                    <img src="/images/icons/edit-blue-grad.svg" class="action-icon action-icon--active" alt="" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    class="ds-row-action"
+                    (click)="onResetRequest(user)"
+                    [attr.aria-label]="'SHARED.ACTIONS.RESET_PASSWORD' | translate"
+                    [attr.title]="'SHARED.ACTIONS.RESET_PASSWORD' | translate">
+                    <img src="/images/icons/reset-password-gray-grad.svg" class="action-icon action-icon--idle" alt="" aria-hidden="true" />
+                    <img src="/images/icons/reset-password-blue-grad.svg" class="action-icon action-icon--active" alt="" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    class="ds-row-action ds-row-action--danger"
+                    (click)="onDeleteRequest(user)"
+                    [attr.aria-label]="'SHARED.ACTIONS.DELETE' | translate"
+                    [attr.title]="'SHARED.ACTIONS.DELETE' | translate">
+                    <img src="/images/icons/delete-gray-grad.svg" class="action-icon action-icon--idle" alt="" aria-hidden="true" />
+                    <img src="/images/icons/delete-red-grad.svg" class="action-icon action-icon--active" alt="" aria-hidden="true" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <!-- Pagination -->
+
+  <app-pagination
+    [pageIndex]="page().options().PageIndex"
+    [totalPages]="page().options().TotalPages"
+    [pageSize]="page().options().PageSize"
+    [totalItems]="page().options().TotalCount"
+    [showPagesNumbers]="true"
+    [showPageSizeOptions]="true"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)" />
+</div>
+
+<!-- Status Change Warning Modal -->
+<ng-template #statusModalTemplate>
+  @let isActivate = !selectedItem()?.IsActive;
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="/images/icons/warning-amber-grad.svg" class="h-12 w-12 shrink-0" alt="" aria-hidden="true" />
+    </div>
+    <h3 class="text-lg font-bold text-app-ink text-center mb-2">
+      @if (isActivate) {
+        {{ 'USERS.CONFIRM_ACTIVATE_TITLE' | translate }}
+      } @else {
+        {{ 'USERS.CONFIRM_DEACTIVATE_TITLE' | translate }}
+      }
+    </h3>
+    <p class="text-app-body text-center mb-6 text-sm leading-relaxed">
+      @if (isActivate) {
+        {{ 'USERS.CONFIRM_ACTIVATE_MESSAGE' | translate }}
+      } @else {
+        {{ 'USERS.CONFIRM_DEACTIVATE_MESSAGE' | translate }}
+      }
+    </p>
+    <div class="flex gap-3">
+      <button type="button" (click)="cancelStatusChange()" class="btn btn-secondary btn-sm flex-1">
+        {{ 'SHARED.ACTIONS.CANCEL' | translate }}
+      </button>
+      <button type="button" (click)="confirmStatusChange()" [disabled]="page().isSaving()" class="btn btn-warning btn-sm flex-1">
+        @if (isActivate) {
+          {{ 'SHARED.ACTIONS.ACTIVATE' | translate }}
+        } @else {
+          {{ 'SHARED.ACTIONS.DEACTIVATE' | translate }}
+        }
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Delete Confirmation Modal -->
+<ng-template #deleteModalTemplate>
+  <div class="p-6">
+    <div class="flex justify-center mb-4">
+      <img src="/images/icons/delete-red-grad.svg" class="h-12 w-12 shrink-0" alt="" aria-hidden="true" />
+    </div>
+    <h3 class="text-lg font-bold text-app-ink text-center mb-2">
+      {{ 'USERS.DELETE_CONFIRM' | translate }}
+    </h3>
+    <p class="text-app-body text-center mb-6 text-sm leading-relaxed">
+      @if (itemToDelete()?.FirstName + ' ' + itemToDelete()?.LastName; as name) {
+        {{ 'SHARED.MESSAGES.CONFIRM_DELETE_MESSAGE_PART1' | translate }}
+        <strong class="text-app-ink">{{ name }}</strong>
+        {{ 'SHARED.MESSAGES.CONFIRM_DELETE_MESSAGE_PART2' | translate }}
+      } @else {
+        {{ 'SHARED.MESSAGES.CONFIRM_DELETE_MESSAGE' | translate }}
+      }
+    </p>
+    <div class="flex gap-3">
+      <button type="button" (click)="cancelDelete()" class="btn btn-secondary btn-sm flex-1">
+        {{ 'SHARED.ACTIONS.CANCEL' | translate }}
+      </button>
+      <button type="button" (click)="submitDelete()" [disabled]="page().isSaving()" class="btn btn-danger btn-sm flex-1">
+        {{ 'SHARED.ACTIONS.DELETE' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Reset Password Modal -->
+<ng-template #resetModalTemplate>
+  <div class="p-6">
+    <div class="mb-4">
+      <h3 class="text-lg font-bold tracking-tight text-app-ink">
+        {{ 'SHARED.ACTIONS.RESET_PASSWORD' | translate }}
+      </h3>
+      @if (itemToReset(); as user) {
+        <p class="mt-1 text-sm text-app-body">
+          <span>{{ 'SHARED.FIELDS.USERNAME' | translate }}:</span>
+          <span class="font-medium text-app-ink">{{ user.Username }}</span>
+        </p>
+      }
+    </div>
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="submitReset()" class="space-y-4">
+      <app-input
+        type="password"
+        formControlName="NewPassword"
+        labelKey="SHARED.FIELDS.PASSWORD"
+        placeholderKey="SHARED.PLACEHOLDERS.PASSWORD"
+        [showPasswordToggle]="true"
+        [control]="resetPasswordForm.get('NewPassword')" />
+      <div class="mt-4">
+        <app-input
+          type="password"
+          formControlName="ConfirmPassword"
+          labelKey="USERS.FIELDS.CONFIRM_PASSWORD"
+          placeholderKey="USERS.FIELDS.CONFIRM_PASSWORD"
+          [showPasswordToggle]="true"
+          [control]="resetPasswordForm.get('ConfirmPassword')" />
+      </div>
+      <div class="mt-6 flex justify-end gap-3">
+        <button type="button" (click)="cancelReset()" class="btn btn-outline btn-sm">
+          {{ 'SHARED.ACTIONS.CANCEL' | translate }}
+        </button>
+        <button type="submit" [disabled]="resetPasswordForm.invalid || page().isSaving()" class="btn btn-primary btn-sm">
+          {{ 'SHARED.ACTIONS.SAVE' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

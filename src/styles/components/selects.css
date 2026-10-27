@@ -1,0 +1,448 @@
+/* Dropdown / Select styling (ds-select) */
+@layer components {
+  .ds-select {
+    position: relative;
+  }
+
+  .ds-select__trigger {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--color-app-ink);
+    background: white;
+    border: 1.5px solid var(--color-app-border);
+    border-radius: var(--radius-control);
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .ds-select__trigger:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+  }
+
+  .ds-select__trigger--error,
+  .ds-select__trigger--error:focus {
+    border-color: var(--color-error-500);
+    box-shadow: 0 0 0 3px var(--color-focus-error);
+  }
+
+  .ds-select__trigger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--color-app-surface);
+  }
+
+  /* Trigger sizes */
+  .ds-select__trigger--sm {
+    height: 36px;
+    padding: 7px 11px;
+    font-size: 13px;
+  }
+
+  .ds-select__trigger--md {
+    height: 40px;
+    padding: 9px 13px;
+    font-size: 13.5px;
+  }
+
+  .ds-select__trigger--lg {
+    height: 48px;
+    padding: 11px 15px;
+    font-size: 14px;
+  }
+
+  /* Trigger variants */
+  .ds-select__trigger--default {
+    background: white;
+  }
+  .ds-select__trigger--filled {
+    background: var(--color-app-surface);
+  }
+  .ds-select__trigger--ghost {
+    background: transparent;
+  }
+
+  /* Borderless inline trigger — Jira-style property editing.
+     Must come after the size rules so it overrides height/padding. */
+  .ds-select__trigger--inline {
+    height: auto;
+    padding: 5px 8px;
+    border-color: transparent;
+    border-radius: 8px;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .ds-select__trigger--inline:hover {
+    background: var(--color-app-surface);
+  }
+
+  /* Reveal the edit affordance (chevron) only on hover/focus */
+  .ds-select__trigger--inline .ds-select__chevron {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .ds-select__trigger--inline:hover .ds-select__chevron,
+  .ds-select__trigger--inline:focus-visible .ds-select__chevron {
+    opacity: 1;
+  }
+
+  /* Compact button-style trigger for toolbar dropdowns */
+  .ds-select__trigger--button {
+    height: 36px;
+    padding: 7px 12px;
+    background: white;
+    font-weight: 500;
+  }
+
+  /* Colored pill trigger for status/priority inline editors.
+     Applied via the `triggerClass` input (e.g. `ds-chip ds-chip--warning`).
+     Sits on top of the inline variant; higher specificity than the plain
+     inline hover so the chip keeps its tint. */
+  .ds-select__trigger--inline.ds-chip {
+    height: 28px;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    border-color: transparent;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .ds-select__trigger--inline.ds-chip::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: currentColor;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+
+  .ds-select__trigger--inline.ds-chip:hover {
+    filter: brightness(0.97);
+  }
+
+  /* Chip label inherits the pill color instead of the hardcoded trigger gray. */
+  .ds-select__trigger--inline.ds-chip .ds-select__trigger-text {
+    color: inherit;
+  }
+
+  .ds-select__trigger--inline.ds-chip .ds-select__chevron {
+    opacity: 0;
+  }
+
+  .ds-select__trigger--inline.ds-chip:hover .ds-select__chevron,
+  .ds-select__trigger--inline.ds-chip:focus-visible .ds-select__chevron {
+    opacity: 1;
+  }
+
+  /* SaaS-style property selector: a neutral field with one semantic color cue.
+     Status follows the common workflow model (open / active / done / inactive),
+     while priority uses an urgency ramp from neutral through red. */
+  .ds-select__trigger--filled.ds-property-tone {
+    --ds-property-tone: #626f86;
+    --ds-property-tone-soft: #f1f2f4;
+
+    border-color: color-mix(in srgb, var(--ds-property-tone) 22%, var(--color-app-border));
+    background: color-mix(in srgb, var(--ds-property-tone-soft) 48%, white);
+    color: var(--color-app-ink);
+    font-weight: 600;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone::before {
+    width: 8px;
+    height: 8px;
+    margin-inline: 4px 3px;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: var(--ds-property-tone);
+    box-shadow: 0 0 0 4px var(--ds-property-tone-soft);
+    content: '';
+  }
+
+  .ds-select__trigger--filled.ds-property-tone:hover {
+    border-color: color-mix(in srgb, var(--ds-property-tone) 35%, var(--color-app-border));
+    background: color-mix(in srgb, var(--ds-property-tone-soft) 72%, white);
+  }
+
+  .ds-select__trigger--filled.ds-property-tone:focus {
+    border-color: var(--ds-property-tone);
+    box-shadow: 0 0 0 3px var(--ds-property-tone-soft);
+  }
+
+  .ds-select__trigger--filled.ds-property-tone .ds-select__trigger-text {
+    color: var(--color-app-ink);
+  }
+
+  .ds-select__trigger--filled.ds-property-tone .ds-select__chevron {
+    color: var(--color-app-muted);
+  }
+
+  /* Workflow statuses: colors mirror the task status palette
+     (pending=amber, in-progress=blue, paused/inactive=gray, active=green). */
+  .ds-select__trigger--filled.ds-property-tone--status-new {
+    --ds-property-tone: #7c3aed;
+    --ds-property-tone-soft: #f5f0ff;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--status-open {
+    --ds-property-tone: #2563eb;
+    --ds-property-tone-soft: #eff6ff;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--status-progress {
+    --ds-property-tone: #eab308;
+    --ds-property-tone-soft: #fefce8;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--status-resolved {
+    --ds-property-tone: #10b981;
+    --ds-property-tone-soft: #ecfdf5;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--status-closed {
+    --ds-property-tone: #6b7280;
+    --ds-property-tone-soft: #f9fafb;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--status-cancelled {
+    --ds-property-tone: #dc2626;
+    --ds-property-tone-soft: #fef2f2;
+  }
+
+  /* Priority/severity: the familiar green-to-red urgency ramp. */
+  .ds-select__trigger--filled.ds-property-tone--priority-low {
+    --ds-property-tone: #2563eb;
+    --ds-property-tone-soft: #eff6ff;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--priority-medium {
+    --ds-property-tone: #eab308;
+    --ds-property-tone-soft: #fefce8;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--priority-high {
+    --ds-property-tone: #f97316;
+    --ds-property-tone-soft: #fff7ed;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--priority-critical {
+    --ds-property-tone: #dc2626;
+    --ds-property-tone-soft: #fef2f2;
+  }
+
+  /* Priority triggers show the colored Jira-style arrow icon instead of a dot. */
+  .ds-select__trigger--filled.ds-property-tone--priority-low::before,
+  .ds-select__trigger--filled.ds-property-tone--priority-medium::before,
+  .ds-select__trigger--filled.ds-property-tone--priority-high::before,
+  .ds-select__trigger--filled.ds-property-tone--priority-critical::before {
+    display: none;
+  }
+
+  .ds-select__trigger--filled.ds-property-tone--neutral {
+    --ds-property-tone: #626f86;
+    --ds-property-tone-soft: #f1f2f4;
+  }
+
+  .ds-chip--info {
+    background: var(--color-primary-50);
+    color: var(--color-primary-700);
+  }
+  .ds-chip--info:hover {
+    background: var(--color-primary-100);
+  }
+
+  .ds-chip--success {
+    background: var(--color-success-50);
+    color: var(--color-success-700);
+  }
+  .ds-chip--success:hover {
+    background: var(--color-success-100);
+  }
+
+  .ds-chip--warning {
+    background: var(--color-warning-50);
+    color: var(--color-warning-700);
+  }
+  .ds-chip--warning:hover {
+    background: var(--color-warning-100);
+  }
+
+  .ds-chip--critical {
+    background: var(--color-error-50);
+    color: var(--color-error-600);
+  }
+  .ds-chip--critical:hover {
+    background: var(--color-error-100);
+  }
+
+  .ds-chip--neutral {
+    background: var(--color-app-surface);
+    color: var(--color-app-body);
+  }
+  .ds-chip--neutral:hover {
+    background: var(--color-gray-200);
+    color: var(--color-app-ink);
+  }
+
+  /* Chevron icon */
+  .ds-select__chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--color-app-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .ds-select__chevron--open {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown menu panel */
+  .ds-select__menu {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    top: calc(100% + 4px);
+    z-index: 10000;
+    background: white;
+    border: 1px solid var(--color-app-border);
+    border-radius: var(--radius-control-lg);
+    box-shadow: var(--shadow-dropdown);
+    max-height: 320px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: ds-select-open 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes ds-select-open {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Menu opens above the trigger when there is no room below */
+  .ds-select__menu--top {
+    top: auto;
+    bottom: calc(100% + 4px);
+    animation-name: ds-select-open-top;
+  }
+
+  @keyframes ds-select-open-top {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Search input inside dropdown */
+  .ds-select__search {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--color-app-border);
+  }
+
+  .ds-select__search-input {
+    width: 100%;
+    height: 36px;
+    padding: 7px 11px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--color-app-ink);
+    background: var(--color-app-page);
+    border: 1.5px solid var(--color-app-border);
+    border-radius: 9px;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ds-select__search-input::placeholder {
+    color: var(--color-app-muted);
+  }
+
+  .ds-select__search-input:focus {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+  }
+
+  /* Options list */
+  .ds-select__options {
+    overflow-y: auto;
+    max-height: 260px;
+    padding: 6px 0;
+  }
+
+  .ds-select__option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-app-body);
+    text-align: start;
+    cursor: pointer;
+    transition:
+      background 0.12s ease,
+      color 0.12s ease;
+    border: none;
+    background: transparent;
+  }
+
+  .ds-select__option:hover {
+    background: var(--color-app-surface);
+    color: var(--color-app-ink);
+  }
+
+  .ds-select__option--selected {
+    background: var(--color-primary-50);
+    color: var(--color-primary-700);
+    font-weight: 600;
+  }
+
+  .ds-select__option--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Option checkmark */
+  .ds-select__check {
+    width: 18px;
+    height: 18px;
+    margin-inline-start: auto;
+    color: var(--color-primary-600);
+    flex-shrink: 0;
+  }
+
+  /* Empty state */
+  .ds-select__empty {
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-app-muted);
+  }
+}

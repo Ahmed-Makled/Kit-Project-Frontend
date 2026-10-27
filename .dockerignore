@@ -1,0 +1,9 @@
+.git
+.github
+.angular
+coverage
+dist
+node_modules
+*.log
+Dockerfile
+README.md

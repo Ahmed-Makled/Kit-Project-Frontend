@@ -1,0 +1,208 @@
+<div class="ds-field">
+  @if (label() || labelKey()) {
+    <label [attr.for]="effectiveId()" class="ds-field__label">
+      @if (labelKey()) {
+        {{ labelKey() | translate }}
+      } @else {
+        {{ label() }}
+      }
+      @if (isRequired()) {
+        <span class="ds-field__required">*</span>
+      }
+    </label>
+  }
+  <div class="relative">
+    @if (hasLeadingIcon() && iconStart()) {
+      <span [class]="leadingIconWrapClasses()" aria-hidden="true">
+        <svg [class]="svgIconClasses()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="iconStart()"></path>
+        </svg>
+      </span>
+    }
+    @if (hasTrailingIcon() && icon()) {
+      <span [class]="trailingIconWrapClasses()" aria-hidden="true">
+        <svg [class]="svgIconClasses()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="icon()"></path>
+        </svg>
+      </span>
+    }
+    <input
+      #inputElement
+      [type]="effectiveInputType()"
+      [id]="effectiveId()"
+      [value]="value"
+      [placeholder]="placeholderKey() ? (placeholderKey() | translate) : placeholder() || (isDateInput() ? datePlaceholder() : '')"
+      [attr.aria-label]="label() || labelKey() ? null : ariaLabelKey() ? (ariaLabelKey() | translate) : ariaLabel() || null"
+      [disabled]="isDisabled()"
+      [readOnly]="readOnly()"
+      [class]="inputClass()"
+      [class.ds-input--error]="hasError()"
+      [attr.aria-invalid]="hasError() ? 'true' : null"
+      [attr.aria-required]="isRequired() ? 'true' : null"
+      [attr.aria-readonly]="readOnly() ? 'true' : null"
+      [attr.aria-describedby]="hasError() ? effectiveId() + '-error' : null"
+      [attr.autocomplete]="autocomplete() !== null && autocomplete() !== '' ? autocomplete() : null"
+      [attr.dir]="inputDir() ?? (isDateInput() ? 'ltr' : null)"
+      [attr.aria-haspopup]="isDateInput() ? 'dialog' : null"
+      [attr.aria-expanded]="isDateInput() ? isDatePickerOpen() : null"
+      [attr.aria-controls]="isDateInput() && isDatePickerOpen() ? effectiveId() + '-picker' : null"
+      (input)="onInputChange($event)"
+      (blur)="onBlur()"
+      (click)="onInputClick(inputElement)"
+      (keydown)="onInputKeydown($event, inputElement)" />
+    @if (hasDateToggle()) {
+      <button
+        type="button"
+        class="ds-input__date-toggle"
+        [disabled]="isDisabled() || readOnly()"
+        [attr.aria-label]="datePickerAriaLabelKey() | translate"
+        [attr.aria-expanded]="isDatePickerOpen()"
+        [attr.aria-controls]="isDatePickerOpen() ? effectiveId() + '-picker' : null"
+        (click)="toggleDatePicker(inputElement)">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+            d="M7 3v3m10-3v3M4.5 9h15M6.5 5h11a2 2 0 012 2v11a2 2 0 01-2 2h-11a2 2 0 01-2-2V7a2 2 0 012-2z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 13h2m2 0h2m-6 4h2m2 0h2" />
+        </svg>
+      </button>
+    }
+    @if (isDateInput() && isDatePickerOpen() && !isDisabled() && !readOnly()) {
+      <div
+        [id]="effectiveId() + '-picker'"
+        class="ds-date-picker"
+        popover="manual"
+        [style.position]="'fixed'"
+        [style.inset]="'auto'"
+        [style.margin]="'0'"
+        [style.top.px]="datePickerViewportPosition()?.top"
+        [style.left.px]="datePickerViewportPosition()?.left"
+        [style.width.px]="datePickerViewportPosition()?.width"
+        [style.max-height.px]="datePickerViewportPosition()?.maxHeight"
+        [style.overflow-y]="'auto'"
+        role="dialog"
+        [attr.aria-label]="datePickerAriaLabelKey() | translate"
+        (keydown.escape)="closeDatePicker()">
+        <div class="ds-date-picker__header">
+          <button type="button" class="ds-date-picker__nav" [attr.aria-label]="previousCalendarLabelKey() | translate" (click)="navigateCalendar(-1)">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          @if (calendarViewMode() === 'years') {
+            <span class="ds-date-picker__title">{{ yearRangeLabel() }}</span>
+          } @else {
+            <button
+              type="button"
+              class="ds-date-picker__title ds-date-picker__title-button"
+              [attr.aria-label]="'SHARED.ACTIONS.SELECT_YEAR' | translate"
+              (click)="toggleYearPicker()">
+              <span>{{ calendarMonthLabel() }}</span>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+          }
+          <button type="button" class="ds-date-picker__nav" [attr.aria-label]="nextCalendarLabelKey() | translate" (click)="navigateCalendar(1)">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        @if (calendarViewMode() === 'years') {
+          <div class="ds-date-picker__years">
+            @for (year of yearOptions(); track year.year) {
+              <button type="button" class="ds-date-picker__year" [class.ds-date-picker__year--selected]="year.isSelected" (click)="selectYear(year.year)">
+                {{ year.year }}
+              </button>
+            }
+          </div>
+        } @else if (type() === 'month') {
+          <div class="ds-date-picker__months">
+            @for (month of monthOptions(); track month.month) {
+              <button type="button" class="ds-date-picker__month" [class.ds-date-picker__month--selected]="month.isSelected" (click)="selectMonth(month.month)">
+                {{ month.label }}
+              </button>
+            }
+          </div>
+        } @else {
+          <div class="ds-date-picker__weekdays" aria-hidden="true">
+            @for (weekday of weekdayLabels(); track weekday) {
+              <span>{{ weekday }}</span>
+            }
+          </div>
+          <div class="ds-date-picker__days">
+            @for (day of calendarDays(); track day.iso) {
+              <button
+                type="button"
+                class="ds-date-picker__day"
+                [class.ds-date-picker__day--muted]="!day.isCurrentMonth"
+                [class.ds-date-picker__day--today]="day.isToday"
+                [class.ds-date-picker__day--selected]="day.isSelected"
+                [attr.aria-label]="formatDateLabel(day.iso)"
+                [attr.aria-current]="day.isToday ? 'date' : null"
+                (click)="selectDate(day.date)">
+                {{ day.day }}
+              </button>
+            }
+          </div>
+        }
+
+        <div class="ds-date-picker__footer">
+          <button type="button" class="ds-date-picker__today" (click)="selectToday()">
+            {{ 'SHARED.ACTIONS.TODAY' | translate }}
+          </button>
+        </div>
+      </div>
+    }
+    @if (type() === 'password' && showPasswordToggle()) {
+      <button
+        type="button"
+        class="ds-input__password-toggle"
+        (click)="togglePasswordVisibility()"
+        [attr.aria-label]="passwordToggleAriaLabelKey() ? (passwordToggleAriaLabelKey() | translate) : ('AUTH.TOGGLE_PASSWORD_VISIBILITY' | translate)"
+        [attr.aria-pressed]="passwordVisible()">
+        @if (passwordVisible()) {
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+          </svg>
+        } @else {
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        }
+      </button>
+    }
+  </div>
+  @if (hasError() && getErrorMessageKey(); as errorKey) {
+    <div class="ds-field__error" [id]="effectiveId() + '-error'" aria-live="polite">
+      <svg class="ds-field__error-icon" fill="currentColor" viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clip-rule="evenodd"></path>
+      </svg>
+      @if (isServerError()) {
+        <span>{{ errorKey }}</span>
+      } @else {
+        @if (getErrorMessageParams(); as params) {
+          <span>{{ errorKey | translate: params }}</span>
+        } @else {
+          <span>{{ errorKey | translate }}</span>
+        }
+      }
+    </div>
+  }
+</div>

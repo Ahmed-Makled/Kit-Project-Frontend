@@ -1,0 +1,167 @@
+/* Radio Button System — ds-radio */
+@layer components {
+  /* Radio group */
+  .ds-radio__group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ds-radio__group--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .ds-radio__group-label {
+    margin-bottom: 4px;
+  }
+
+  /* Individual radio */
+  .ds-radio {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .ds-radio--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* Hide native radio */
+  .ds-radio__input {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 50%;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
+
+  /* Custom radio circle */
+  .ds-radio__circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1.5px solid var(--color-app-border);
+    border-radius: 50%;
+    background: var(--color-app-page);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+    position: relative;
+  }
+
+  /* Inner dot */
+  .ds-radio__circle::after {
+    content: '';
+    width: 40%;
+    height: 40%;
+    background: white;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+  }
+
+  /* Size variants */
+  .ds-radio__group--sm .ds-radio__circle {
+    width: 16px;
+    height: 16px;
+  }
+
+  .ds-radio__group--md .ds-radio__circle {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ds-radio__group--lg .ds-radio__circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Label */
+  .ds-radio__label {
+    font-size: 13.5px;
+    color: var(--color-app-body);
+    line-height: 1.4;
+  }
+
+  .ds-radio__group--sm .ds-radio__label {
+    font-size: 12px;
+  }
+
+  .ds-radio__group--lg .ds-radio__label {
+    font-size: 14px;
+  }
+
+  /* States */
+  .ds-radio__input:focus-visible + .ds-radio__circle {
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+    border-color: var(--color-primary-500);
+  }
+
+  .ds-radio__input:checked + .ds-radio__circle {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+  }
+
+  .ds-radio__input:checked + .ds-radio__circle::after {
+    transform: scale(1);
+  }
+
+  /* Variant: primary (default) */
+  .ds-radio__input--primary:checked + .ds-radio__circle {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+  }
+
+  .ds-radio__input--primary:focus-visible + .ds-radio__circle {
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+    border-color: var(--color-primary-500);
+  }
+
+  /* Variant: success */
+  .ds-radio__input--success:checked + .ds-radio__circle {
+    background: var(--color-success-600);
+    border-color: var(--color-success-600);
+  }
+
+  .ds-radio__input--success:focus-visible + .ds-radio__circle {
+    box-shadow: 0 0 0 3px var(--color-focus-success);
+    border-color: var(--color-success-600);
+  }
+
+  /* Variant: danger */
+  .ds-radio__input--danger:checked + .ds-radio__circle {
+    background: var(--color-error-600);
+    border-color: var(--color-error-600);
+  }
+
+  .ds-radio__input--danger:focus-visible + .ds-radio__circle {
+    box-shadow: 0 0 0 3px var(--color-focus-danger);
+    border-color: var(--color-error-600);
+  }
+
+  /* Disabled states */
+  .ds-radio__input:disabled + .ds-radio__circle {
+    background: var(--color-app-surface);
+    border-color: var(--color-app-border);
+  }
+
+  .ds-radio__input:checked:disabled + .ds-radio__circle {
+    background: var(--color-app-muted);
+    border-color: var(--color-app-muted);
+  }
+
+  .ds-radio__input:checked:disabled + .ds-radio__circle::after {
+    background: white;
+    transform: scale(1);
+  }
+}
